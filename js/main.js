@@ -989,6 +989,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         createAmmoniaMolecule('lab-molecule-3d');
                     } else if (moleculeKey === 'HF' && typeof createHFMolecule === 'function') {
                         createHFMolecule('lab-molecule-3d');
+                    } else if (moleculeKey === 'HCl' && typeof createHClMolecule === 'function') {
+                        createHClMolecule('lab-molecule-3d');
+                    } else if (moleculeKey === 'CH4' && typeof createMethaneMolecule === 'function') {
+                        createMethaneMolecule('lab-molecule-3d');
+                    } else if (moleculeKey === 'CO2' && typeof createCO2Molecule === 'function') {
+                        createCO2Molecule('lab-molecule-3d');
                     } else if (typeof createGenericMolecule === 'function') {
                         createGenericMolecule('lab-molecule-3d', moleculeKey.toLowerCase());
                     }

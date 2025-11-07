@@ -443,6 +443,202 @@ function createHFMolecule(containerId) {
 }
 
 /**
+ * Create HCl Molecule (Linear)
+ */
+function createHClMolecule(containerId) {
+    if (!isThreeJSLoaded()) {
+        console.warn('Three.js not loaded for', containerId);
+        return;
+    }
+
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    const { scene, camera, renderer } = createScene(container);
+
+    // Hydrogen atom (white/light blue)
+    const hydrogen = createAtom(0.5, 0xeeeeee);
+    hydrogen.position.set(-1.5, 0, 0);
+    scene.add(hydrogen);
+
+    // Chlorine atom (green)
+    const chlorine = createAtom(0.8, 0x51cf66);
+    chlorine.position.set(0.5, 0, 0);
+    scene.add(chlorine);
+
+    // Bond
+    const bond = createBond(hydrogen.position, chlorine.position);
+    scene.add(bond);
+
+    // Add partial charges
+    const chargeGeometry = new THREE.RingGeometry(0.3, 0.4, 32);
+    const positiveMaterial = new THREE.MeshBasicMaterial({
+        color: 0xff6b6b,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.5
+    });
+    const negativeMaterial = new THREE.MeshBasicMaterial({
+        color: 0x4dabf7,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.5
+    });
+
+    const positiveCharge = new THREE.Mesh(chargeGeometry, positiveMaterial);
+    positiveCharge.position.copy(hydrogen.position);
+    positiveCharge.position.z = 0.1;
+    scene.add(positiveCharge);
+
+    const negativeCharge = new THREE.Mesh(chargeGeometry, negativeMaterial);
+    negativeCharge.position.copy(chlorine.position);
+    negativeCharge.position.z = 0.1;
+    scene.add(negativeCharge);
+
+    addMouseControls(container, camera, renderer, scene);
+
+    function animate() {
+        requestAnimationFrame(animate);
+        scene.rotation.y += 0.002;
+        positiveCharge.rotation.z += 0.02;
+        negativeCharge.rotation.z -= 0.02;
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    activeScenes.push({ renderer, container });
+}
+
+/**
+ * Create CH4 Molecule (Tetrahedral)
+ */
+function createMethaneMolecule(containerId) {
+    if (!isThreeJSLoaded()) {
+        console.warn('Three.js not loaded for', containerId);
+        return;
+    }
+
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    const { scene, camera, renderer } = createScene(container);
+
+    // Carbon atom (gray/dark)
+    const carbon = createAtom(0.7, 0x666666);
+    carbon.position.set(0, 0, 0);
+    scene.add(carbon);
+
+    // Tetrahedral geometry (109.5° angles)
+    const bondLength = 1.8;
+    const tetrahedralAngles = [
+        { x: 1, y: 1, z: 1 },
+        { x: -1, y: -1, z: 1 },
+        { x: 1, y: -1, z: -1 },
+        { x: -1, y: 1, z: -1 }
+    ];
+
+    tetrahedralAngles.forEach((direction) => {
+        const hydrogen = createAtom(0.4, 0xeeeeee);
+        const normalized = Math.sqrt(direction.x ** 2 + direction.y ** 2 + direction.z ** 2);
+        hydrogen.position.set(
+            (direction.x / normalized) * bondLength,
+            (direction.y / normalized) * bondLength,
+            (direction.z / normalized) * bondLength
+        );
+        scene.add(hydrogen);
+
+        const bond = createBond(carbon.position, hydrogen.position);
+        scene.add(bond);
+    });
+
+    addMouseControls(container, camera, renderer, scene);
+
+    function animate() {
+        requestAnimationFrame(animate);
+        scene.rotation.y += 0.003;
+        scene.rotation.x += 0.001;
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    activeScenes.push({ renderer, container });
+}
+
+/**
+ * Create CO2 Molecule (Linear)
+ */
+function createCO2Molecule(containerId) {
+    if (!isThreeJSLoaded()) {
+        console.warn('Three.js not loaded for', containerId);
+        return;
+    }
+
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    const { scene, camera, renderer } = createScene(container);
+
+    // Carbon atom (gray/dark) in center
+    const carbon = createAtom(0.7, 0x666666);
+    carbon.position.set(0, 0, 0);
+    scene.add(carbon);
+
+    // First Oxygen atom (red) on left
+    const oxygen1 = createAtom(0.6, 0xff4444);
+    oxygen1.position.set(-2, 0, 0);
+    scene.add(oxygen1);
+
+    // Second Oxygen atom (red) on right
+    const oxygen2 = createAtom(0.6, 0xff4444);
+    oxygen2.position.set(2, 0, 0);
+    scene.add(oxygen2);
+
+    // Double bonds (represented by two parallel lines)
+    const bondMaterial = new THREE.LineBasicMaterial({ color: 0xcccccc, linewidth: 2 });
+
+    // Left double bond
+    const leftBond1 = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(-2, 0.1, 0),
+        new THREE.Vector3(0, 0.1, 0)
+    ]);
+    const leftBond2 = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(-2, -0.1, 0),
+        new THREE.Vector3(0, -0.1, 0)
+    ]);
+    scene.add(new THREE.Line(leftBond1, bondMaterial));
+    scene.add(new THREE.Line(leftBond2, bondMaterial));
+
+    // Right double bond
+    const rightBond1 = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(0, 0.1, 0),
+        new THREE.Vector3(2, 0.1, 0)
+    ]);
+    const rightBond2 = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(0, -0.1, 0),
+        new THREE.Vector3(2, -0.1, 0)
+    ]);
+    scene.add(new THREE.Line(rightBond1, bondMaterial));
+    scene.add(new THREE.Line(rightBond2, bondMaterial));
+
+    addMouseControls(container, camera, renderer, scene);
+
+    function animate() {
+        requestAnimationFrame(animate);
+        scene.rotation.y += 0.002;
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    activeScenes.push({ renderer, container });
+}
+
+/**
  * Create a generic molecule for demos
  */
 function createGenericMolecule(containerId, type = 'generic') {
@@ -848,6 +1044,9 @@ function cleanup3DModels() {
 window.createWaterMolecule = createWaterMolecule;
 window.createAmmoniaMolecule = createAmmoniaMolecule;
 window.createHFMolecule = createHFMolecule;
+window.createHClMolecule = createHClMolecule;
+window.createMethaneMolecule = createMethaneMolecule;
+window.createCO2Molecule = createCO2Molecule;
 window.createGenericMolecule = createGenericMolecule;
 window.createLondonForcesDemo = createLondonForcesDemo;
 window.createDipoleDemo = createDipoleDemo;

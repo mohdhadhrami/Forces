@@ -1589,6 +1589,388 @@ textarea:focus {
     outline-offset: 2px;
 }
 
+/* Hydrogen Bonds Network Section */
+.hbond-network-section {
+    margin: var(--spacing-xxl) 0;
+    background: var(--bg-hover);
+    padding: var(--spacing-xxl);
+    border-radius: var(--radius-lg);
+}
+
+.hbond-network-section h3 {
+    font-size: var(--font-size-xl);
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.network-explanation {
+    text-align: center;
+    margin-bottom: var(--spacing-xxl);
+}
+
+.highlight-text {
+    font-size: var(--font-size-lg);
+    color: var(--secondary-color);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-lg);
+    background: rgba(52, 152, 219, 0.1);
+    border-radius: var(--radius-md);
+}
+
+.molecules-comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xxl);
+}
+
+.molecule-network-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-fast);
+}
+
+.molecule-network-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.molecule-network-card.water-card {
+    border-top: 4px solid #3498DB;
+}
+
+.molecule-network-card.hf-card {
+    border-top: 4px solid #9B59B6;
+}
+
+.molecule-network-card.methane-card {
+    border-top: 4px solid #E67E22;
+}
+
+.network-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.molecule-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--secondary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+}
+
+.network-header h4 {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.network-diagram {
+    position: relative;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.central-molecule {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: var(--secondary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    z-index: 2;
+    box-shadow: var(--shadow-md);
+}
+
+.surrounding-molecules {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.surr-mol {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: rgba(52, 152, 219, 0.3);
+    border: 2px solid var(--secondary-color);
+    color: var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+}
+
+.surr-mol.top {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.surr-mol.right {
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+.surr-mol.bottom {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.surr-mol.left {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+.connection-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.network-diagram.linear {
+    height: 100px;
+}
+
+.linear-chain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+}
+
+.chain-mol {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: rgba(155, 89, 182, 0.2);
+    border: 2px solid #9B59B6;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+}
+
+.chain-mol.central {
+    background: #9B59B6;
+    color: white;
+}
+
+.chain-bond {
+    color: var(--secondary-color);
+    font-weight: 700;
+}
+
+.isolated-molecules {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+}
+
+.isolated-mol {
+    padding: var(--spacing-md);
+    background: rgba(230, 126, 34, 0.2);
+    border: 2px solid #E67E22;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    text-align: center;
+}
+
+.no-bonds-text {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--warning-color);
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+}
+
+.network-stats {
+    margin-top: var(--spacing-lg);
+}
+
+.stat-item {
+    background: rgba(52, 152, 219, 0.1);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.stat-item.highlight {
+    background: rgba(39, 174, 96, 0.2);
+    border: 2px solid var(--success-color);
+}
+
+.stat-item.warning {
+    background: rgba(230, 126, 34, 0.2);
+    border: 2px solid var(--warning-color);
+}
+
+.stat-item i {
+    margin-left: var(--spacing-xs);
+}
+
+.stat-detail {
+    margin: var(--spacing-md) 0;
+    font-size: var(--font-size-sm);
+    line-height: 1.8;
+}
+
+.stat-detail p {
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-secondary);
+}
+
+.property-box {
+    background: var(--bg-hover);
+    border: 2px solid var(--secondary-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin-top: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.property-box.success {
+    border-color: var(--success-color);
+    background: rgba(39, 174, 96, 0.1);
+}
+
+.property-box.danger {
+    border-color: var(--accent-color);
+    background: rgba(231, 76, 60, 0.1);
+}
+
+.property-box i {
+    font-size: var(--font-size-xl);
+    color: var(--secondary-color);
+}
+
+.property-box.success i {
+    color: var(--success-color);
+}
+
+.property-box.danger i {
+    color: var(--accent-color);
+}
+
+.property-box strong {
+    display: block;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-xs);
+}
+
+.small-text {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.key-insight-box {
+    background: linear-gradient(135deg, rgba(241, 196, 15, 0.1), rgba(243, 156, 18, 0.1));
+    border: 3px solid var(--warning-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xxl);
+    margin-top: var(--spacing-xxl);
+    display: flex;
+    gap: var(--spacing-xl);
+}
+
+.insight-icon {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background: var(--warning-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.insight-content h4 {
+    color: var(--primary-color);
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+.insight-text {
+    font-size: var(--font-size-lg);
+    line-height: 1.8;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.insight-explanation {
+    display: grid;
+    gap: var(--spacing-md);
+}
+
+.explanation-point {
+    display: flex;
+    gap: var(--spacing-md);
+    background: var(--bg-card);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+}
+
+.point-number {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--warning-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.explanation-point p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
 /* ============================================
    PHYSICAL PROPERTIES SECTION
    ============================================ */

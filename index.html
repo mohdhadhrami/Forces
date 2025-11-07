@@ -701,6 +701,165 @@
                     </div>
                 </div>
 
+                <!-- Hydrogen Bonds Network -->
+                <div class="hbond-network-section" data-aos="fade-up">
+                    <h3><i class="fas fa-project-diagram"></i> شبكة الروابط الهيدروجينية: مقارنة بين الجزيئات</h3>
+
+                    <div class="network-explanation">
+                        <p class="highlight-text">
+                            <i class="fas fa-lightbulb"></i>
+                            عدد الروابط الهيدروجينية التي يمكن لكل جزيء تكوينها يؤثر بشكل مباشر على خصائصه الفيزيائية، خاصة درجة الغليان!
+                        </p>
+                    </div>
+
+                    <div class="molecules-comparison-grid">
+                        <!-- Water Network -->
+                        <div class="molecule-network-card water-card">
+                            <div class="network-header">
+                                <div class="molecule-icon">H₂O</div>
+                                <h4>الماء</h4>
+                            </div>
+
+                            <div class="network-diagram">
+                                <div class="central-molecule">
+                                    <span class="molecule-label">H₂O</span>
+                                </div>
+                                <div class="surrounding-molecules">
+                                    <div class="surr-mol top">H₂O</div>
+                                    <div class="surr-mol right">H₂O</div>
+                                    <div class="surr-mol bottom">H₂O</div>
+                                    <div class="surr-mol left">H₂O</div>
+                                </div>
+                                <svg class="connection-lines" viewBox="0 0 200 200">
+                                    <line x1="100" y1="100" x2="100" y2="30" stroke="#3498DB" stroke-width="2" stroke-dasharray="5,5"/>
+                                    <line x1="100" y1="100" x2="170" y2="100" stroke="#3498DB" stroke-width="2" stroke-dasharray="5,5"/>
+                                    <line x1="100" y1="100" x2="100" y2="170" stroke="#3498DB" stroke-width="2" stroke-dasharray="5,5"/>
+                                    <line x1="100" y1="100" x2="30" y2="100" stroke="#3498DB" stroke-width="2" stroke-dasharray="5,5"/>
+                                </svg>
+                            </div>
+
+                            <div class="network-stats">
+                                <div class="stat-item highlight">
+                                    <i class="fas fa-link"></i>
+                                    <strong>4 روابط هيدروجينية</strong>
+                                </div>
+                                <div class="stat-detail">
+                                    <p>• ذرة O تحتوي على <strong>زوجين إلكترونيين منفردين</strong> (يستقبل 2 روابط)</p>
+                                    <p>• ذرتي H <strong>موجبتان جزئياً</strong> (يُكوّنان 2 روابط)</p>
+                                </div>
+                                <div class="property-box success">
+                                    <i class="fas fa-temperature-high"></i>
+                                    <div>
+                                        <strong>درجة الغليان: 100°C</strong>
+                                        <p class="small-text">الكتلة المولية: 18 g/mol</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- HF Network -->
+                        <div class="molecule-network-card hf-card">
+                            <div class="network-header">
+                                <div class="molecule-icon">HF</div>
+                                <h4>فلوريد الهيدروجين</h4>
+                            </div>
+
+                            <div class="network-diagram linear">
+                                <div class="linear-chain">
+                                    <span class="chain-mol">HF</span>
+                                    <span class="chain-bond">---</span>
+                                    <span class="chain-mol central">HF</span>
+                                    <span class="chain-bond">---</span>
+                                    <span class="chain-mol">HF</span>
+                                </div>
+                            </div>
+
+                            <div class="network-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-link"></i>
+                                    <strong>2 رابطة هيدروجينية</strong>
+                                </div>
+                                <div class="stat-detail">
+                                    <p>• F تحتوي على <strong>3 أزواج إلكترونية</strong> (يستقبل 1 رابطة)</p>
+                                    <p>• H واحدة فقط (يُكوّن 1 رابطة)</p>
+                                    <p>• يُكوّن <strong>سلاسل خطية طويلة</strong></p>
+                                </div>
+                                <div class="property-box">
+                                    <i class="fas fa-temperature-high"></i>
+                                    <div>
+                                        <strong>درجة الغليان: 20°C</strong>
+                                        <p class="small-text">الكتلة المولية: 20 g/mol</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Methane Network (No H-bonds) -->
+                        <div class="molecule-network-card methane-card">
+                            <div class="network-header">
+                                <div class="molecule-icon">CH₄</div>
+                                <h4>الميثان (للمقارنة)</h4>
+                            </div>
+
+                            <div class="network-diagram">
+                                <div class="isolated-molecules">
+                                    <span class="isolated-mol">CH₄</span>
+                                    <span class="isolated-mol">CH₄</span>
+                                    <span class="isolated-mol">CH₄</span>
+                                    <span class="isolated-mol">CH₄</span>
+                                </div>
+                                <p class="no-bonds-text">⚠️ لا توجد روابط هيدروجينية</p>
+                            </div>
+
+                            <div class="network-stats">
+                                <div class="stat-item warning">
+                                    <i class="fas fa-times-circle"></i>
+                                    <strong>0 رابطة هيدروجينية</strong>
+                                </div>
+                                <div class="stat-detail">
+                                    <p>• C غير كافية في السالبية الكهربائية</p>
+                                    <p>• <strong>قوى لندن فقط</strong> بين الجزيئات</p>
+                                    <p>• جزيئات منفصلة تماماً</p>
+                                </div>
+                                <div class="property-box danger">
+                                    <i class="fas fa-temperature-low"></i>
+                                    <div>
+                                        <strong>درجة الغليان: -164°C</strong>
+                                        <p class="small-text">الكتلة المولية: 16 g/mol</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Key Insight -->
+                    <div class="key-insight-box">
+                        <div class="insight-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="insight-content">
+                            <h4>🔑 الملاحظة الأساسية:</h4>
+                            <p class="insight-text">
+                                <strong>الماء له درجة غليان مرتفعة جداً (100°C)</strong> رغم أن كتلته المولية <strong>أقل</strong> من الميثان والعديد من الجزيئات الأخرى!
+                            </p>
+                            <div class="insight-explanation">
+                                <div class="explanation-point">
+                                    <span class="point-number">1</span>
+                                    <p><strong>السبب الرئيسي:</strong> كل جزيء ماء يُكوّن <strong>4 روابط هيدروجينية</strong> مع الجزيئات المحيطة، مما يخلق شبكة ترابط قوية جداً</p>
+                                </div>
+                                <div class="explanation-point">
+                                    <span class="point-number">2</span>
+                                    <p><strong>كثرة الروابط:</strong> تتطلب طاقة حرارية عالية لكسر هذه الشبكة وتحويل الماء من سائل إلى غاز</p>
+                                </div>
+                                <div class="explanation-point">
+                                    <span class="point-number">3</span>
+                                    <p><strong>المقارنة:</strong> الميثان (CH₄) كتلته المولية 16 g/mol لكن درجة غليانه -164°C لأنه <strong>لا يُكوّن أي روابط هيدروجينية!</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="did-you-know" data-aos="fade-up">
                     <h3><i class="fas fa-dna"></i> هل تعلم؟</h3>
                     <p>الروابط الهيدروجينية هي المسؤولة عن ربط شريطي الحمض النووي DNA معاً! تربط القواعد النيتروجينية (A-T و G-C) بواسطة روابط هيدروجينية، مما يسمح بفصل الشريطين عند الحاجة للنسخ.</p>
