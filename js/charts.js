@@ -26,6 +26,9 @@ function initializeAllCharts() {
     // Halides Chart (HF, HCl, HBr, HI)
     createHalidesChart();
 
+    // Unified Interactive Chart
+    createUnifiedChart();
+
     // Electronegativity Chart
     createElectronegativityChart();
 
@@ -293,6 +296,161 @@ function createHalidesChart() {
             }
         });
     }
+}
+
+// Unified Interactive Chart
+let unifiedChartInstance = null;
+
+function createUnifiedChart() {
+    const canvas = document.getElementById('unified-chart');
+    if (!canvas || typeof Chart === 'undefined') return;
+
+    const ctx = canvas.getContext('2d');
+
+    // Define all datasets
+    const datasets = [
+        {
+            label: 'المجموعة 15',
+            data: [
+                { x: 'NH₃', y: -33 },
+                { x: 'PH₃', y: -88 },
+                { x: 'AsH₃', y: -62 },
+                { x: 'SbH₃', y: -17 }
+            ],
+            borderColor: '#3498DB',
+            backgroundColor: 'rgba(52, 152, 219, 0.1)',
+            borderWidth: 3,
+            pointRadius: 6,
+            pointBackgroundColor: '#3498DB',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            tension: 0.4,
+            hidden: false,
+            group: 'group15'
+        },
+        {
+            label: 'المجموعة 16',
+            data: [
+                { x: 'H₂O', y: 100 },
+                { x: 'H₂S', y: -60 },
+                { x: 'H₂Se', y: -41 },
+                { x: 'H₂Te', y: -2 }
+            ],
+            borderColor: '#27AE60',
+            backgroundColor: 'rgba(39, 174, 96, 0.1)',
+            borderWidth: 3,
+            pointRadius: 6,
+            pointBackgroundColor: '#27AE60',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            tension: 0.4,
+            hidden: false,
+            group: 'group16'
+        },
+        {
+            label: 'هاليدات الهيدروجين',
+            data: [
+                { x: 'HF', y: 20 },
+                { x: 'HCl', y: -85 },
+                { x: 'HBr', y: -67 },
+                { x: 'HI', y: -35 }
+            ],
+            borderColor: '#E74C3C',
+            backgroundColor: 'rgba(231, 76, 60, 0.1)',
+            borderWidth: 3,
+            pointRadius: 6,
+            pointBackgroundColor: '#E74C3C',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            tension: 0.4,
+            hidden: false,
+            group: 'halides'
+        }
+    ];
+
+    unifiedChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        font: { size: 14, family: 'Cairo' },
+                        color: '#2C3E50',
+                        usePointStyle: true,
+                        padding: 15
+                    }
+                },
+                tooltip: {
+                    backgroundColor: '#2C3E50',
+                    titleFont: { size: 14, family: 'Cairo' },
+                    bodyFont: { size: 13, family: 'Cairo' },
+                    padding: 12,
+                    displayColors: true,
+                    callbacks: {
+                        label: function(context) {
+                            return context.dataset.label + ': ' + context.parsed.y + '°C';
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    title: {
+                        display: true,
+                        text: 'درجة الغليان (°C)',
+                        font: { size: 14, family: 'Cairo' },
+                        color: '#2C3E50'
+                    },
+                    ticks: {
+                        font: { family: 'Cairo' },
+                        color: '#7F8C8D'
+                    },
+                    grid: { color: 'rgba(0,0,0,0.05)' }
+                },
+                x: {
+                    type: 'category',
+                    ticks: {
+                        font: { family: 'Cairo', size: 13 },
+                        color: '#2C3E50'
+                    },
+                    grid: { display: false }
+                }
+            }
+        }
+    });
+
+    // Add checkbox event listeners
+    document.getElementById('toggle-group15')?.addEventListener('change', (e) => {
+        const dataset = unifiedChartInstance.data.datasets.find(ds => ds.group === 'group15');
+        if (dataset) {
+            dataset.hidden = !e.target.checked;
+            unifiedChartInstance.update();
+        }
+    });
+
+    document.getElementById('toggle-group16')?.addEventListener('change', (e) => {
+        const dataset = unifiedChartInstance.data.datasets.find(ds => ds.group === 'group16');
+        if (dataset) {
+            dataset.hidden = !e.target.checked;
+            unifiedChartInstance.update();
+        }
+    });
+
+    document.getElementById('toggle-halides')?.addEventListener('change', (e) => {
+        const dataset = unifiedChartInstance.data.datasets.find(ds => ds.group === 'halides');
+        if (dataset) {
+            dataset.hidden = !e.target.checked;
+            unifiedChartInstance.update();
+        }
+    });
 }
 
 // Electronegativity Chart
