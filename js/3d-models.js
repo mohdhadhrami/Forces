@@ -38,24 +38,33 @@ document.addEventListener('DOMContentLoaded', () => {
 function initialize3DModels() {
     const modelContainers = document.querySelectorAll('.model-3d');
 
-    modelContainers.forEach((container) => {
+    modelContainers.forEach((container, index) => {
         const containerId = container.id;
 
         // Create appropriate molecule based on container ID
         if (containerId) {
+            console.log(`🔍 Found container: ${containerId}`);
+
             if (containerId.includes('water') || containerId.includes('h2o')) {
                 createWaterMolecule(containerId);
             } else if (containerId.includes('ammonia') || containerId.includes('nh3')) {
                 createAmmoniaMolecule(containerId);
             } else if (containerId.includes('hf')) {
                 createHFMolecule(containerId);
-            } else if (containerId.includes('london') || containerId.includes('dipole')) {
-                createGenericMolecule(containerId, 'demo');
+            } else if (containerId.includes('london')) {
+                createLondonForcesDemo(containerId);
+            } else if (containerId.includes('dipole')) {
+                createDipoleDemo(containerId);
+            } else if (containerId.includes('lab-molecule')) {
+                createGenericMolecule(containerId, 'lab');
             } else {
-                createGenericMolecule(containerId);
+                createGenericMolecule(containerId, 'generic');
             }
         } else {
-            createGenericMolecule(`model-${Date.now()}-${Math.random()}`);
+            // Assign ID if not present
+            const newId = `model-${Date.now()}-${index}`;
+            container.id = newId;
+            createGenericMolecule(newId, 'generic');
         }
     });
 
@@ -483,6 +492,188 @@ function createGenericMolecule(containerId, type = 'generic') {
 }
 
 /**
+ * Create London Forces demonstration
+ */
+function createLondonForcesDemo(containerId) {
+    if (!isThreeJSLoaded()) {
+        console.warn('Three.js not loaded for', containerId);
+        return;
+    }
+
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    const { scene, camera, renderer } = createScene(container);
+
+    // Create two non-polar molecules (e.g., I2)
+    const atom1a = createAtom(0.8, 0x9c27b0);
+    atom1a.position.set(-2, 1, 0);
+    scene.add(atom1a);
+
+    const atom1b = createAtom(0.8, 0x9c27b0);
+    atom1b.position.set(-3.5, 1, 0);
+    scene.add(atom1b);
+
+    const bond1 = createBond(atom1a.position, atom1b.position, 0xcccccc);
+    scene.add(bond1);
+
+    // Second molecule
+    const atom2a = createAtom(0.8, 0x9c27b0);
+    atom2a.position.set(2, -1, 0);
+    scene.add(atom2a);
+
+    const atom2b = createAtom(0.8, 0x9c27b0);
+    atom2b.position.set(3.5, -1, 0);
+    scene.add(atom2b);
+
+    const bond2 = createBond(atom2a.position, atom2b.position, 0xcccccc);
+    scene.add(bond2);
+
+    // Add electron clouds (transient dipoles)
+    const cloudGeometry = new THREE.SphereGeometry(1.2, 16, 16);
+    const cloudMaterial = new THREE.MeshBasicMaterial({
+        color: 0x4dabf7,
+        transparent: true,
+        opacity: 0.2,
+        wireframe: true
+    });
+
+    const cloud1 = new THREE.Mesh(cloudGeometry, cloudMaterial);
+    cloud1.position.set(-2.75, 1, 0);
+    scene.add(cloud1);
+
+    const cloud2 = new THREE.Mesh(cloudGeometry, cloudMaterial);
+    cloud2.position.set(2.75, -1, 0);
+    scene.add(cloud2);
+
+    addMouseControls(container, camera, renderer, scene);
+
+    let time = 0;
+    function animate() {
+        requestAnimationFrame(animate);
+        time += 0.02;
+
+        // Animate electron clouds to show temporary dipoles
+        cloud1.scale.x = 1 + Math.sin(time) * 0.2;
+        cloud2.scale.x = 1 + Math.sin(time + Math.PI) * 0.2;
+
+        scene.rotation.y += 0.002;
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    activeScenes.push({ renderer, container });
+}
+
+/**
+ * Create Dipole-Dipole demonstration
+ */
+function createDipoleDemo(containerId) {
+    if (!isThreeJSLoaded()) {
+        console.warn('Three.js not loaded for', containerId);
+        return;
+    }
+
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    const { scene, camera, renderer } = createScene(container);
+
+    // Create two HCl molecules showing dipole-dipole interaction
+
+    // First HCl molecule
+    const h1 = createAtom(0.5, 0xeeeeee);
+    h1.position.set(-2, 1, 0);
+    scene.add(h1);
+
+    const cl1 = createAtom(0.8, 0x51cf66);
+    cl1.position.set(-3.5, 1, 0);
+    scene.add(cl1);
+
+    const bond1 = createBond(h1.position, cl1.position);
+    scene.add(bond1);
+
+    // Add charge indicators
+    const positiveGeometry = new THREE.RingGeometry(0.2, 0.3, 16);
+    const positiveMaterial = new THREE.MeshBasicMaterial({
+        color: 0xff6b6b,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.6
+    });
+    const positive1 = new THREE.Mesh(positiveGeometry, positiveMaterial);
+    positive1.position.set(h1.position.x, h1.position.y, 0.2);
+    scene.add(positive1);
+
+    const negativeMaterial = new THREE.MeshBasicMaterial({
+        color: 0x4dabf7,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.6
+    });
+    const negative1 = new THREE.Mesh(positiveGeometry, negativeMaterial);
+    negative1.position.set(cl1.position.x, cl1.position.y, 0.2);
+    scene.add(negative1);
+
+    // Second HCl molecule
+    const h2 = createAtom(0.5, 0xeeeeee);
+    h2.position.set(2, -1, 0);
+    scene.add(h2);
+
+    const cl2 = createAtom(0.8, 0x51cf66);
+    cl2.position.set(3.5, -1, 0);
+    scene.add(cl2);
+
+    const bond2 = createBond(h2.position, cl2.position);
+    scene.add(bond2);
+
+    const positive2 = new THREE.Mesh(positiveGeometry, positiveMaterial);
+    positive2.position.set(h2.position.x, h2.position.y, 0.2);
+    scene.add(positive2);
+
+    const negative2 = new THREE.Mesh(positiveGeometry, negativeMaterial);
+    negative2.position.set(cl2.position.x, cl2.position.y, 0.2);
+    scene.add(negative2);
+
+    // Add attraction line between opposite charges
+    const attractionGeometry = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(h1.position.x, h1.position.y, 0),
+        new THREE.Vector3(cl2.position.x, cl2.position.y, 0)
+    ]);
+    const attractionMaterial = new THREE.LineDashedMaterial({
+        color: 0xffff00,
+        dashSize: 0.2,
+        gapSize: 0.1,
+        linewidth: 2
+    });
+    const attractionLine = new THREE.Line(attractionGeometry, attractionMaterial);
+    attractionLine.computeLineDistances();
+    scene.add(attractionLine);
+
+    addMouseControls(container, camera, renderer, scene);
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        // Rotate charge indicators
+        positive1.rotation.z += 0.02;
+        negative1.rotation.z -= 0.02;
+        positive2.rotation.z += 0.02;
+        negative2.rotation.z -= 0.02;
+
+        scene.rotation.y += 0.002;
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    activeScenes.push({ renderer, container });
+}
+
+/**
  * Cleanup function
  */
 function cleanup3DModels() {
@@ -502,6 +693,8 @@ window.createWaterMolecule = createWaterMolecule;
 window.createAmmoniaMolecule = createAmmoniaMolecule;
 window.createHFMolecule = createHFMolecule;
 window.createGenericMolecule = createGenericMolecule;
+window.createLondonForcesDemo = createLondonForcesDemo;
+window.createDipoleDemo = createDipoleDemo;
 window.cleanup3DModels = cleanup3DModels;
 
 console.log('✅ 3D Models module loaded!');
