@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="درس تفاعلي شامل عن قوى الترابط بين الجزيئات للصف الحادي عشر - يشمل نماذج 3D تفاعلية، رسوم بيانية، واختبارات">
+    <meta name="keywords" content="قوى فان دير فالس، الرابطة الهيدروجينية، قوى لندن، كيمياء، الصف الحادي عشر">
+    <meta name="author" content="منصة التعليم التفاعلية">
+    <title>قوى الترابط بين الجزيئات | درس تفاعلي</title>
+
+    <!-- Google Fonts - Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="molecule-loader">
+                <div class="atom"></div>
+                <div class="atom"></div>
+                <div class="atom"></div>
+            </div>
+            <p>جاري التحميل...</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-atom"></i>
+                    <h1>قوى الترابط بين الجزيئات</h1>
+                </div>
+                <div class="header-controls">
+                    <button id="theme-toggle" class="icon-btn" aria-label="تبديل الوضع الليلي">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button id="sound-toggle" class="icon-btn" aria-label="تشغيل/إيقاف الصوت">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <div class="score-display">
+                        <i class="fas fa-star"></i>
+                        <span id="total-score">0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="main-progress-bar"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="فتح القائمة">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Main Layout -->
+    <div class="main-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>محتويات الدرس</h3>
+                <button class="close-sidebar" id="close-sidebar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active" data-section="intro">
+                        <i class="fas fa-home"></i>
+                        <span>مقدمة</span>
+                        <span class="progress-indicator">0%</span>
+                    </li>
+                    <li class="nav-item" data-section="van-der-waals">
+                        <i class="fas fa-magnet"></i>
+                        <span>قوى فان دير فالس</span>
+                        <span class="progress-indicator">0%</span>
+                    </li>
+                    <li class="nav-item" data-section="hydrogen-bond">
+                        <i class="fas fa-link"></i>
+                        <span>الرابطة الهيدروجينية</span>
+                        <span class="progress-indicator">0%</span>
+                    </li>
+                    <li class="nav-item" data-section="physical-properties">
+                        <i class="fas fa-thermometer-half"></i>
+                        <span>الخصائص الفيزيائية</span>
+                        <span class="progress-indicator">0%</span>
+                    </li>
+                    <li class="nav-item" data-section="electronegativity">
+                        <i class="fas fa-bolt"></i>
+                        <span>السالبية الكهربائية</span>
+                        <span class="progress-indicator">0%</span>
+                    </li>
+                    <li class="nav-item" data-section="virtual-lab">
+                        <i class="fas fa-flask"></i>
+                        <span>المختبر الافتراضي</span>
+                        <span class="progress-indicator">0%</span>
+                    </li>
+                    <li class="nav-item" data-section="quiz">
+                        <i class="fas fa-question-circle"></i>
+                        <span>الاختبار التفاعلي</span>
+                        <span class="progress-indicator">0%</span>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Achievements Panel -->
+            <div class="achievements-panel">
+                <h4><i class="fas fa-trophy"></i> الإنجازات</h4>
+                <div class="badges-container" id="badges-container">
+                    <div class="badge locked" data-badge="first-step">
+                        <i class="fas fa-star"></i>
+                        <span>الخطوة الأولى</span>
+                    </div>
+                    <div class="badge locked" data-badge="scientist">
+                        <i class="fas fa-user-graduate"></i>
+                        <span>عالم متميز</span>
+                    </div>
+                    <div class="badge locked" data-badge="master">
+                        <i class="fas fa-crown"></i>
+                        <span>خبير الجزيئات</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Section 1: Introduction -->
+            <section id="intro" class="content-section active">
+                <div class="section-header" data-aos="fade-down">
+                    <h2><i class="fas fa-home"></i> مقدمة: قوى الترابط بين الجزيئات</h2>
+                    <p class="section-description">اكتشف عالم القوى الخفية التي تربط الجزيئات معاً وتحدد خصائص المواد من حولنا</p>
+                </div>
+
+                <div class="intro-hero" data-aos="zoom-in">
+                    <div class="hero-content">
+                        <h3>ما هي قوى الترابط بين الجزيئات؟</h3>
+                        <p>هي قوى التجاذب أو التنافر التي تحدث بين الجزيئات، وهي أضعف من الروابط التساهمية أو الأيونية داخل الجزيء نفسه. تؤثر هذه القوى بشكل كبير على الخصائص الفيزيائية للمواد.</p>
+                    </div>
+                </div>
+
+                <!-- Force Types Cards -->
+                <div class="cards-grid" data-aos="fade-up">
+                    <div class="force-card" data-force="london">
+                        <div class="card-icon">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        <h3>قوى لندن التشتتية</h3>
+                        <p>أضعف أنواع القوى بين الجزيئات، توجد في جميع الجزيئات</p>
+                        <div class="strength-bar">
+                            <div class="strength-fill" style="width: 20%;"></div>
+                        </div>
+                        <span class="strength-label">0.05-40 kJ/mol</span>
+                    </div>
+
+                    <div class="force-card" data-force="dipole">
+                        <div class="card-icon">
+                            <i class="fas fa-magnet"></i>
+                        </div>
+                        <h3>قوى ثنائي القطب</h3>
+                        <p>تحدث بين الجزيئات القطبية التي تحتوي على أقطاب دائمة</p>
+                        <div class="strength-bar">
+                            <div class="strength-fill" style="width: 40%;"></div>
+                        </div>
+                        <span class="strength-label">2-10 kJ/mol</span>
+                    </div>
+
+                    <div class="force-card" data-force="hydrogen">
+                        <div class="card-icon">
+                            <i class="fas fa-link"></i>
+                        </div>
+                        <h3>الرابطة الهيدروجينية</h3>
+                        <p>أقوى أنواع القوى بين الجزيئات، تحدث مع H-F, H-O, H-N</p>
+                        <div class="strength-bar">
+                            <div class="strength-fill" style="width: 60%;"></div>
+                        </div>
+                        <span class="strength-label">10-40 kJ/mol</span>
+                    </div>
+
+                    <div class="force-card" data-force="covalent">
+                        <div class="card-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h3>الرابطة التساهمية (للمقارنة)</h3>
+                        <p>روابط داخل الجزيء نفسه، أقوى بكثير من القوى بين الجزيئات</p>
+                        <div class="strength-bar">
+                            <div class="strength-fill" style="width: 100%;"></div>
+                        </div>
+                        <span class="strength-label">150-1000 kJ/mol</span>
+                    </div>
+                </div>
+
+                <!-- Quick Comparison Table -->
+                <div class="comparison-table-container" data-aos="fade-up">
+                    <h3><i class="fas fa-table"></i> جدول المقارنة السريع</h3>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>نوع القوة</th>
+                                <th>القوة النسبية</th>
+                                <th>الجزيئات</th>
+                                <th>أمثلة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>قوى لندن</strong></td>
+                                <td><span class="badge-weak">ضعيفة</span></td>
+                                <td>جميع الجزيئات</td>
+                                <td>CH₄, CO₂, I₂</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ثنائي القطب</strong></td>
+                                <td><span class="badge-medium">متوسطة</span></td>
+                                <td>الجزيئات القطبية</td>
+                                <td>HCl, SO₂, CHCl₃</td>
+                            </tr>
+                            <tr>
+                                <td><strong>الرابطة الهيدروجينية</strong></td>
+                                <td><span class="badge-strong">قوية</span></td>
+                                <td>H مع F, O, N</td>
+                                <td>H₂O, NH₃, HF</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="next-section-btn">
+                    <button class="btn-primary" onclick="navigateToSection('van-der-waals')">
+                        التالي: قوى فان دير فالس <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Section 2: Van der Waals Forces -->
+            <section id="van-der-waals" class="content-section">
+                <div class="section-header" data-aos="fade-down">
+                    <h2><i class="fas fa-magnet"></i> قوى فان دير فالس</h2>
+                    <p class="section-description">تعرف على قوى لندن التشتتية وقوى ثنائي القطب الدائم</p>
+                </div>
+
+                <!-- Tabs for different forces -->
+                <div class="tabs-container" data-aos="fade-up">
+                    <div class="tabs-header">
+                        <button class="tab-btn active" data-tab="london">
+                            <i class="fas fa-atom"></i> قوى لندن التشتتية
+                        </button>
+                        <button class="tab-btn" data-tab="dipole-dipole">
+                            <i class="fas fa-magnet"></i> قوى ثنائي القطب
+                        </button>
+                        <button class="tab-btn" data-tab="comparison">
+                            <i class="fas fa-balance-scale"></i> المقارنة
+                        </button>
+                    </div>
+
+                    <!-- London Forces Tab -->
+                    <div class="tab-content active" id="london-tab">
+                        <div class="content-grid">
+                            <div class="text-content">
+                                <h3>قوى لندن التشتتية (London Dispersion Forces)</h3>
+                                <div class="info-box">
+                                    <h4><i class="fas fa-info-circle"></i> التعريف</h4>
+                                    <p>هي قوى تجاذب ضعيفة تنشأ بين الجزيئات نتيجة التوزيع غير المتساوي للإلكترونات لحظياً، مما يؤدي إلى تكوين أقطاب مؤقتة.</p>
+                                </div>
+
+                                <div class="info-box">
+                                    <h4><i class="fas fa-lightbulb"></i> آلية التكوين</h4>
+                                    <ol class="steps-list">
+                                        <li><strong>حركة الإلكترونات:</strong> الإلكترونات في حركة مستمرة حول النواة</li>
+                                        <li><strong>القطب اللحظي:</strong> في لحظة معينة، قد تتركز الإلكترونات في جانب واحد</li>
+                                        <li><strong>الحث:</strong> القطب اللحظي يحفز تكوين قطب في الجزيء المجاور</li>
+                                        <li><strong>التجاذب:</strong> تحدث قوة تجاذب ضعيفة بين الأقطاب المؤقتة</li>
+                                    </ol>
+                                </div>
+
+                                <div class="highlight-box">
+                                    <h4><i class="fas fa-star"></i> خصائص مهمة</h4>
+                                    <ul>
+                                        <li>توجد في <strong>جميع</strong> الجزيئات (قطبية وغير قطبية)</li>
+                                        <li>تزداد قوتها مع زيادة عدد الإلكترونات (الكتلة الجزيئية)</li>
+                                        <li>تزداد مع زيادة مساحة السطح الجزيئي</li>
+                                        <li>أضعف أنواع القوى بين الجزيئات</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="visual-content">
+                                <div class="model-container">
+                                    <h4>نموذج ثلاثي الأبعاد تفاعلي</h4>
+                                    <div id="london-3d-model" class="model-3d"></div>
+                                    <div class="model-controls">
+                                        <button class="btn-secondary" onclick="resetModel('london')">
+                                            <i class="fas fa-redo"></i> إعادة ضبط
+                                        </button>
+                                        <button class="btn-secondary" onclick="animateModel('london')">
+                                            <i class="fas fa-play"></i> تشغيل الحركة
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="example-box">
+                                    <h4>أمثلة واقعية</h4>
+                                    <div class="examples-grid">
+                                        <div class="example-item">
+                                            <div class="molecule-formula">I₂</div>
+                                            <p>اليود - جزيء غير قطبي</p>
+                                        </div>
+                                        <div class="example-item">
+                                            <div class="molecule-formula">CH₄</div>
+                                            <p>الميثان - متماثل</p>
+                                        </div>
+                                        <div class="example-item">
+                                            <div class="molecule-formula">CO₂</div>
+                                            <p>ثاني أكسيد الكربون</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dipole-Dipole Tab -->
+                    <div class="tab-content" id="dipole-dipole-tab">
+                        <div class="content-grid">
+                            <div class="text-content">
+                                <h3>قوى ثنائي القطب الدائم (Dipole-Dipole Forces)</h3>
+                                <div class="info-box">
+                                    <h4><i class="fas fa-info-circle"></i> التعريف</h4>
+                                    <p>قوى تجاذب تحدث بين الجزيئات القطبية، حيث يتجاذب الطرف الموجب من جزيء مع الطرف السالب من جزيء آخر.</p>
+                                </div>
+
+                                <div class="info-box">
+                                    <h4><i class="fas fa-check-circle"></i> شروط التكوين</h4>
+                                    <ul class="check-list">
+                                        <li><i class="fas fa-check"></i> يجب أن يكون الجزيء <strong>قطبي</strong></li>
+                                        <li><i class="fas fa-check"></i> وجود فرق في السالبية الكهربائية</li>
+                                        <li><i class="fas fa-check"></i> عدم التماثل في الشكل الجزيئي</li>
+                                    </ul>
+                                </div>
+
+                                <div class="formula-box">
+                                    <h4><i class="fas fa-calculator"></i> العلاقة</h4>
+                                    <p>قوة التجاذب ∝ عزم ثنائي القطب</p>
+                                    <p class="sub-note">كلما زاد عزم ثنائي القطب، زادت قوة التجاذب</p>
+                                </div>
+
+                                <div class="highlight-box">
+                                    <h4><i class="fas fa-star"></i> خصائص مهمة</h4>
+                                    <ul>
+                                        <li>أقوى من قوى لندن التشتتية</li>
+                                        <li>تحدث فقط في الجزيئات القطبية</li>
+                                        <li>تعتمد على درجة قطبية الجزيء</li>
+                                        <li>لها اتجاه معين (δ+ ← δ-)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="visual-content">
+                                <div class="model-container">
+                                    <h4>نموذج ثلاثي الأبعاد تفاعلي</h4>
+                                    <div id="dipole-3d-model" class="model-3d"></div>
+                                    <div class="model-controls">
+                                        <button class="btn-secondary" onclick="resetModel('dipole')">
+                                            <i class="fas fa-redo"></i> إعادة ضبط
+                                        </button>
+                                        <button class="btn-secondary" onclick="animateModel('dipole')">
+                                            <i class="fas fa-play"></i> تشغيل الحركة
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="example-box">
+                                    <h4>أمثلة واقعية</h4>
+                                    <div class="examples-grid">
+                                        <div class="example-item">
+                                            <div class="molecule-formula">HCl</div>
+                                            <p>حمض الهيدروكلوريك</p>
+                                            <span class="dipole-indicator">δ+ H—Cl δ-</span>
+                                        </div>
+                                        <div class="example-item">
+                                            <div class="molecule-formula">SO₂</div>
+                                            <p>ثاني أكسيد الكبريت</p>
+                                            <span class="dipole-indicator">جزيء منحني</span>
+                                        </div>
+                                        <div class="example-item">
+                                            <div class="molecule-formula">CHCl₃</div>
+                                            <p>الكلوروفورم</p>
+                                            <span class="dipole-indicator">غير متماثل</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Tab -->
+                    <div class="tab-content" id="comparison-tab">
+                        <h3>المقارنة بين قوى لندن وقوى ثنائي القطب</h3>
+
+                        <div class="comparison-grid">
+                            <div class="comparison-card">
+                                <h4>قوى لندن التشتتية</h4>
+                                <ul>
+                                    <li><strong>النوع:</strong> قوى مؤقتة</li>
+                                    <li><strong>السبب:</strong> أقطاب لحظية</li>
+                                    <li><strong>الجزيئات:</strong> جميع الجزيئات</li>
+                                    <li><strong>القوة:</strong> ضعيفة جداً</li>
+                                    <li><strong>الطاقة:</strong> 0.05-40 kJ/mol</li>
+                                    <li><strong>مثال:</strong> I₂, CH₄</li>
+                                </ul>
+                            </div>
+
+                            <div class="vs-divider">
+                                <span>VS</span>
+                            </div>
+
+                            <div class="comparison-card">
+                                <h4>قوى ثنائي القطب الدائم</h4>
+                                <ul>
+                                    <li><strong>النوع:</strong> قوى دائمة</li>
+                                    <li><strong>السبب:</strong> أقطاب دائمة</li>
+                                    <li><strong>الجزيئات:</strong> الجزيئات القطبية فقط</li>
+                                    <li><strong>القوة:</strong> متوسطة</li>
+                                    <li><strong>الطاقة:</strong> 2-10 kJ/mol</li>
+                                    <li><strong>مثال:</strong> HCl, SO₂</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="interactive-comparison">
+                            <h4>مقارنة تفاعلية: تأثير القوى على درجة الغليان</h4>
+                            <div class="chart-container">
+                                <canvas id="vdw-comparison-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="did-you-know" data-aos="fade-up">
+                    <h3><i class="fas fa-lightbulb"></i> هل تعلم؟</h3>
+                    <p>السحالي (الوزغ) تستطيع المشي على الأسقف بفضل قوى فان دير فالس! لديها ملايين الشعيرات الدقيقة على أقدامها التي تخلق مساحة سطح كبيرة، مما يزيد من قوى لندن بينها وبين السطح.</p>
+                </div>
+
+                <div class="next-section-btn">
+                    <button class="btn-primary" onclick="navigateToSection('hydrogen-bond')">
+                        التالي: الرابطة الهيدروجينية <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Section 3: Hydrogen Bond -->
+            <section id="hydrogen-bond" class="content-section">
+                <div class="section-header" data-aos="fade-down">
+                    <h2><i class="fas fa-link"></i> الرابطة الهيدروجينية</h2>
+                    <p class="section-description">أقوى أنواع القوى بين الجزيئات وأهمها في الطبيعة</p>
+                </div>
+
+                <div class="hero-card" data-aos="zoom-in">
+                    <h3>ما هي الرابطة الهيدروجينية؟</h3>
+                    <p>هي نوع خاص وقوي من قوى ثنائي القطب تحدث عندما يرتبط ذرة هيدروجين مرتبطة تساهمياً بذرة شديدة السالبية الكهربائية (F, O, N) مع ذرة أخرى شديدة السالبية في جزيء مجاور.</p>
+                </div>
+
+                <!-- Three Conditions -->
+                <div class="conditions-container" data-aos="fade-up">
+                    <h3><i class="fas fa-list-check"></i> الشروط الثلاثة لتكوين الرابطة الهيدروجينية</h3>
+
+                    <div class="conditions-grid">
+                        <div class="condition-card">
+                            <div class="condition-number">1</div>
+                            <div class="condition-icon"><i class="fas fa-atom"></i></div>
+                            <h4>وجود ذرة هيدروجين</h4>
+                            <p>يجب أن يحتوي الجزيء على ذرة هيدروجين (H) مرتبطة تساهمياً</p>
+                        </div>
+
+                        <div class="condition-arrow">
+                            <i class="fas fa-arrow-left"></i>
+                        </div>
+
+                        <div class="condition-card">
+                            <div class="condition-number">2</div>
+                            <div class="condition-icon"><i class="fas fa-bolt"></i></div>
+                            <h4>ذرة شديدة السالبية</h4>
+                            <p>يجب أن يرتبط الهيدروجين بذرة شديدة السالبية الكهربائية (F, O, N)</p>
+                        </div>
+
+                        <div class="condition-arrow">
+                            <i class="fas fa-arrow-left"></i>
+                        </div>
+
+                        <div class="condition-card">
+                            <div class="condition-number">3</div>
+                            <div class="condition-icon"><i class="fas fa-link"></i></div>
+                            <h4>زوج إلكترونات حر</h4>
+                            <p>وجود زوج إلكترونات حر على ذرة (F, O, N) في الجزيء المجاور</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mechanism -->
+                <div class="mechanism-section" data-aos="fade-up">
+                    <h3><i class="fas fa-cogs"></i> آلية تكوين الرابطة الهيدروجينية</h3>
+
+                    <div class="mechanism-steps">
+                        <div class="step-card">
+                            <div class="step-visual">
+                                <span class="charge positive">δ+</span>
+                                <span class="atom-label">H</span>
+                                <span class="bond">—</span>
+                                <span class="atom-label">F</span>
+                                <span class="charge negative">δ-</span>
+                            </div>
+                            <div class="step-description">
+                                <h4>الخطوة 1: استقطاب الرابطة</h4>
+                                <p>الفلور أكثر سالبية كهربائية من الهيدروجين، فتنجذب الإلكترونات نحوه، تاركة الهيدروجين بشحنة جزئية موجبة (δ+)</p>
+                            </div>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-visual">
+                                <div class="two-molecules">
+                                    <span class="molecule-1">
+                                        <span class="charge positive">δ+</span>
+                                        <span>H—F</span>
+                                        <span class="charge negative">δ-</span>
+                                    </span>
+                                    <span class="h-bond">····</span>
+                                    <span class="molecule-2">
+                                        <span class="charge negative">δ-</span>
+                                        <span>F—H</span>
+                                        <span class="charge positive">δ+</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="step-description">
+                                <h4>الخطوة 2: التجاذب الكهروستاتيكي</h4>
+                                <p>الهيدروجين الموجب جزئياً (δ+) ينجذب نحو زوج الإلكترونات الحر على ذرة الفلور في جزيء مجاور</p>
+                            </div>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-visual">
+                                <div class="multiple-molecules">
+                                    <span>H—F····H—F····H—F</span>
+                                </div>
+                            </div>
+                            <div class="step-description">
+                                <h4>الخطوة 3: تكوين الشبكة</h4>
+                                <p>تتكون روابط هيدروجينية متعددة بين الجزيئات، مكونة شبكة ثلاثية الأبعاد</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Examples -->
+                <div class="examples-section" data-aos="fade-up">
+                    <h3><i class="fas fa-flask"></i> أمثلة على الرابطة الهيدروجينية</h3>
+
+                    <div class="tabs-container">
+                        <div class="tabs-header">
+                            <button class="tab-btn active" data-tab="water">
+                                <i class="fas fa-tint"></i> الماء (H₂O)
+                            </button>
+                            <button class="tab-btn" data-tab="ammonia">
+                                <i class="fas fa-vial"></i> الأمونيا (NH₃)
+                            </button>
+                            <button class="tab-btn" data-tab="hf">
+                                <i class="fas fa-atom"></i> فلوريد الهيدروجين (HF)
+                            </button>
+                        </div>
+
+                        <!-- Water Tab -->
+                        <div class="tab-content active" id="water-tab">
+                            <div class="example-detailed">
+                                <div class="example-3d">
+                                    <h4>نموذج ثلاثي الأبعاد لجزيء الماء</h4>
+                                    <div id="water-3d-model" class="model-3d"></div>
+                                    <div class="model-info">
+                                        <p><strong>الزاوية:</strong> 104.5°</p>
+                                        <p><strong>الشكل:</strong> منحني (Bent)</p>
+                                        <p><strong>عدد الروابط H:</strong> كل جزيء ماء يمكن أن يكون 4 روابط هيدروجينية</p>
+                                    </div>
+                                </div>
+                                <div class="example-explanation">
+                                    <h4>لماذا الماء مميز؟</h4>
+                                    <ul class="feature-list">
+                                        <li>
+                                            <i class="fas fa-snowflake"></i>
+                                            <strong>كثافة غير عادية:</strong> الثلج أقل كثافة من الماء السائل، لذلك يطفو
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-temperature-high"></i>
+                                            <strong>درجة غليان مرتفعة:</strong> 100°C مقارنة بـ H₂S (-60°C)
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-fire"></i>
+                                            <strong>حرارة نوعية عالية:</strong> يمتص كمية كبيرة من الحرارة
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-water"></i>
+                                            <strong>توتر سطحي عالي:</strong> يسمح للحشرات بالمشي على سطح الماء
+                                        </li>
+                                    </ul>
+
+                                    <div class="interactive-demo">
+                                        <h5>عرض تفاعلي: بنية الثلج vs الماء السائل</h5>
+                                        <div class="demo-controls">
+                                            <button class="btn-demo active" data-state="ice">
+                                                <i class="fas fa-snowflake"></i> بنية الثلج
+                                            </button>
+                                            <button class="btn-demo" data-state="liquid">
+                                                <i class="fas fa-tint"></i> الماء السائل
+                                            </button>
+                                        </div>
+                                        <div id="water-state-visualization" class="visualization-area"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ammonia Tab -->
+                        <div class="tab-content" id="ammonia-tab">
+                            <div class="example-detailed">
+                                <div class="example-3d">
+                                    <h4>نموذج ثلاثي الأبعاد لجزيء الأمونيا</h4>
+                                    <div id="ammonia-3d-model" class="model-3d"></div>
+                                    <div class="model-info">
+                                        <p><strong>الزاوية:</strong> 107°</p>
+                                        <p><strong>الشكل:</strong> هرم ثلاثي (Trigonal Pyramidal)</p>
+                                        <p><strong>عدد الروابط H:</strong> كل جزيء يمكن أن يكون 3 روابط</p>
+                                    </div>
+                                </div>
+                                <div class="example-explanation">
+                                    <h4>خصائص الأمونيا</h4>
+                                    <ul class="feature-list">
+                                        <li>
+                                            <i class="fas fa-temperature-low"></i>
+                                            <strong>درجة الغليان:</strong> -33°C (أعلى من PH₃: -88°C)
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-water"></i>
+                                            <strong>الذوبانية:</strong> شديد الذوبان في الماء بسبب الروابط الهيدروجينية
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-industry"></i>
+                                            <strong>الاستخدامات:</strong> الأسمدة، التبريد، المنظفات
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- HF Tab -->
+                        <div class="tab-content" id="hf-tab">
+                            <div class="example-detailed">
+                                <div class="example-3d">
+                                    <h4>نموذج ثلاثي الأبعاد لفلوريد الهيدروجين</h4>
+                                    <div id="hf-3d-model" class="model-3d"></div>
+                                    <div class="model-info">
+                                        <p><strong>النوع:</strong> جزيء خطي</p>
+                                        <p><strong>الروابط H:</strong> قوية جداً (الفلور أكثر ذرة سالبية)</p>
+                                    </div>
+                                </div>
+                                <div class="example-explanation">
+                                    <h4>لماذا HF مميز؟</h4>
+                                    <ul class="feature-list">
+                                        <li>
+                                            <i class="fas fa-bolt"></i>
+                                            <strong>أقوى رابطة هيدروجينية:</strong> F هو الأكثر سالبية كهربائية
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-temperature-high"></i>
+                                            <strong>درجة غليان عالية:</strong> 20°C (HCl: -85°C, HBr: -67°C)
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-link"></i>
+                                            <strong>تكوين سلاسل:</strong> يكون سلاسل طويلة من الروابط الهيدروجينية
+                                        </li>
+                                    </ul>
+
+                                    <div class="halide-comparison">
+                                        <h5>مقارنة هاليدات الهيدروجين</h5>
+                                        <canvas id="halides-chart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="did-you-know" data-aos="fade-up">
+                    <h3><i class="fas fa-dna"></i> هل تعلم؟</h3>
+                    <p>الروابط الهيدروجينية هي المسؤولة عن ربط شريطي الحمض النووي DNA معاً! تربط القواعد النيتروجينية (A-T و G-C) بواسطة روابط هيدروجينية، مما يسمح بفصل الشريطين عند الحاجة للنسخ.</p>
+                </div>
+
+                <div class="next-section-btn">
+                    <button class="btn-primary" onclick="navigateToSection('physical-properties')">
+                        التالي: الخصائص الفيزيائية <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Section 4: Physical Properties -->
+            <section id="physical-properties" class="content-section">
+                <div class="section-header" data-aos="fade-down">
+                    <h2><i class="fas fa-thermometer-half"></i> تأثير القوى على الخصائص الفيزيائية</h2>
+                    <p class="section-description">اكتشف كيف تؤثر قوى الترابط على خصائص المواد</p>
+                </div>
+
+                <!-- Boiling Points -->
+                <div class="property-section" data-aos="fade-up">
+                    <h3><i class="fas fa-temperature-high"></i> درجات الغليان</h3>
+                    <p class="intro-text">كلما زادت قوة الترابط بين الجزيئات، زادت درجة الغليان</p>
+
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h4>المجموعة 15 (NH₃, PH₃, AsH₃)</h4>
+                            <canvas id="group15-chart"></canvas>
+                            <div class="chart-note">
+                                <i class="fas fa-info-circle"></i>
+                                <p>NH₃ لديها درجة غليان أعلى بكثير بسبب الروابط الهيدروجينية</p>
+                            </div>
+                        </div>
+
+                        <div class="chart-card">
+                            <h4>المجموعة 16 (H₂O, H₂S, H₂Se, H₂Te)</h4>
+                            <canvas id="group16-chart"></canvas>
+                            <div class="chart-note">
+                                <i class="fas fa-info-circle"></i>
+                                <p>H₂O لديها درجة غليان استثنائية بسبب الروابط الهيدروجينية القوية</p>
+                            </div>
+                        </div>
+
+                        <div class="chart-card">
+                            <h4>هاليدات الهيدروجين (HF, HCl, HBr, HI)</h4>
+                            <canvas id="halides-bp-chart"></canvas>
+                            <div class="chart-note">
+                                <i class="fas fa-info-circle"></i>
+                                <p>HF استثناء واضح بسبب الروابط الهيدروجينية الق وية</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Table -->
+                    <div class="sortable-table-container">
+                        <h4>جدول البيانات التفاعلي (قابل للفرز)</h4>
+                        <table class="sortable-table" id="boiling-points-table">
+                            <thead>
+                                <tr>
+                                    <th data-sort="molecule">الجزيء <i class="fas fa-sort"></i></th>
+                                    <th data-sort="bp">درجة الغليان (°C) <i class="fas fa-sort"></i></th>
+                                    <th data-sort="molar">الكتلة المولية (g/mol) <i class="fas fa-sort"></i></th>
+                                    <th data-sort="force">نوع القوة الرئيسية <i class="fas fa-sort"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>H₂O</strong></td>
+                                    <td>100</td>
+                                    <td>18</td>
+                                    <td><span class="badge-strong">رابطة هيدروجينية</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>H₂S</strong></td>
+                                    <td>-60</td>
+                                    <td>34</td>
+                                    <td><span class="badge-medium">ثنائي القطب</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>H₂Se</strong></td>
+                                    <td>-41</td>
+                                    <td>81</td>
+                                    <td><span class="badge-medium">ثنائي القطب</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>H₂Te</strong></td>
+                                    <td>-2</td>
+                                    <td>130</td>
+                                    <td><span class="badge-medium">ثنائي القطب</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>NH₃</strong></td>
+                                    <td>-33</td>
+                                    <td>17</td>
+                                    <td><span class="badge-strong">رابطة هيدروجينية</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>PH₃</strong></td>
+                                    <td>-88</td>
+                                    <td>34</td>
+                                    <td><span class="badge-weak">قوى لندن</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>HF</strong></td>
+                                    <td>20</td>
+                                    <td>20</td>
+                                    <td><span class="badge-strong">رابطة هيدروجينية</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>HCl</strong></td>
+                                    <td>-85</td>
+                                    <td>36.5</td>
+                                    <td><span class="badge-medium">ثنائي القطب</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>HBr</strong></td>
+                                    <td>-67</td>
+                                    <td>81</td>
+                                    <td><span class="badge-medium">ثنائي القطب</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>HI</strong></td>
+                                    <td>-35</td>
+                                    <td>128</td>
+                                    <td><span class="badge-weak">قوى لندن</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Density & Ice Floating -->
+                <div class="property-section" data-aos="fade-up">
+                    <h3><i class="fas fa-snowflake"></i> الكثافة: ظاهرة طفو الجليد</h3>
+
+                    <div class="ice-explanation">
+                        <div class="explanation-text">
+                            <h4>لماذا يطفو الجليد على الماء؟</h4>
+                            <p>عند تجمد الماء، تترتب الجزيئات في بنية بلورية سداسية منتظمة بسبب الروابط الهيدروجينية. هذه البنية تخلق فراغات كبيرة بين الجزيئات، مما يجعل الثلج أقل كثافة من الماء السائل.</p>
+
+                            <div class="density-values">
+                                <div class="density-card">
+                                    <i class="fas fa-snowflake"></i>
+                                    <h5>كثافة الثلج</h5>
+                                    <p class="value">0.92 g/cm³</p>
+                                </div>
+                                <div class="density-arrow">
+                                    <i class="fas fa-less-than"></i>
+                                </div>
+                                <div class="density-card">
+                                    <i class="fas fa-tint"></i>
+                                    <h5>كثافة الماء السائل</h5>
+                                    <p class="value">1.00 g/cm³</p>
+                                </div>
+                            </div>
+
+                            <div class="importance-box">
+                                <h5><i class="fas fa-fish"></i> الأهمية البيئية</h5>
+                                <p>طفو الجليد على سطح البحار والبحيرات يحمي الحياة المائية تحته. لو كان الجليد أكثر كثافة وغاص إلى القاع، لتجمدت المسطحات المائية بالكامل!</p>
+                            </div>
+                        </div>
+
+                        <div class="ice-visualization">
+                            <div class="structure-comparison">
+                                <div class="structure-box">
+                                    <h5>بنية الثلج (0°C)</h5>
+                                    <div id="ice-structure-viz" class="structure-viz"></div>
+                                    <p>بنية منتظمة مفتوحة</p>
+                                </div>
+                                <div class="structure-box">
+                                    <h5>بنية الماء (4°C)</h5>
+                                    <div id="water-structure-viz" class="structure-viz"></div>
+                                    <p>جزيئات أقرب لبعضها</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Surface Tension & Viscosity -->
+                <div class="property-section" data-aos="fade-up">
+                    <h3><i class="fas fa-water"></i> التوتر السطحي واللزوجة</h3>
+
+                    <div class="properties-grid">
+                        <div class="property-card">
+                            <div class="property-icon">
+                                <i class="fas fa-water"></i>
+                            </div>
+                            <h4>التوتر السطحي</h4>
+                            <p>قوة التجاذب بين جزيئات السطح تجعل السطح يتصرف كغشاء مرن</p>
+
+                            <div class="demo-area">
+                                <h5>التجربة الافتراضية</h5>
+                                <div class="surface-tension-demo">
+                                    <div class="demo-visual" id="surface-tension-viz">
+                                        <div class="water-surface">
+                                            <div class="insect">🦗</div>
+                                        </div>
+                                    </div>
+                                    <div class="demo-controls">
+                                        <label>قوة الترابط:</label>
+                                        <input type="range" id="tension-slider" min="1" max="10" value="8">
+                                        <p class="demo-result">النتيجة: <span id="tension-result">الحشرة تطفو</span></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="examples-list">
+                                <h5>أمثلة من الحياة:</h5>
+                                <ul>
+                                    <li><i class="fas fa-bug"></i> الحشرات تمشي على الماء</li>
+                                    <li><i class="fas fa-tint"></i> القطرات الكروية</li>
+                                    <li><i class="fas fa-leaf"></i> الماء يصعد في النباتات</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="property-card">
+                            <div class="property-icon">
+                                <i class="fas fa-fill-drip"></i>
+                            </div>
+                            <h4>اللزوجة</h4>
+                            <p>مقاومة السائل للجريان - تزداد مع زيادة قوى الترابط</p>
+
+                            <div class="viscosity-comparison">
+                                <h5>مقارنة اللزوجة</h5>
+                                <div class="viscosity-bars">
+                                    <div class="viscosity-item">
+                                        <span class="liquid-name">الماء</span>
+                                        <div class="viscosity-bar">
+                                            <div class="viscosity-fill" style="width: 30%;" data-value="1.0"></div>
+                                        </div>
+                                        <span class="viscosity-value">1.0 mPa·s</span>
+                                    </div>
+                                    <div class="viscosity-item">
+                                        <span class="liquid-name">الزيت</span>
+                                        <div class="viscosity-bar">
+                                            <div class="viscosity-fill" style="width: 60%;" data-value="50"></div>
+                                        </div>
+                                        <span class="viscosity-value">~50 mPa·s</span>
+                                    </div>
+                                    <div class="viscosity-item">
+                                        <span class="liquid-name">العسل</span>
+                                        <div class="viscosity-bar">
+                                            <div class="viscosity-fill" style="width: 100%;" data-value="10000"></div>
+                                        </div>
+                                        <span class="viscosity-value">~10000 mPa·s</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="interactive-demo">
+                                <h5>محاكاة تفاعلية</h5>
+                                <div class="flow-simulation">
+                                    <div class="simulation-container" id="viscosity-sim">
+                                        <div class="liquid-drop" data-liquid="water"></div>
+                                    </div>
+                                    <div class="sim-controls">
+                                        <label>نوع السائل:</label>
+                                        <select id="liquid-selector">
+                                            <option value="water">ماء (روابط H قوية)</option>
+                                            <option value="oil">زيت (قوى لندن)</option>
+                                            <option value="honey">عسل (روابط قوية جداً)</option>
+                                        </select>
+                                        <button class="btn-secondary" onclick="startFlowSimulation()">
+                                            <i class="fas fa-play"></i> بدء المحاكاة
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="next-section-btn">
+                    <button class="btn-primary" onclick="navigateToSection('electronegativity')">
+                        التالي: السالبية الكهربائية <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Section 5: Electronegativity -->
+            <section id="electronegativity" class="content-section">
+                <div class="section-header" data-aos="fade-down">
+                    <h2><i class="fas fa-bolt"></i> السالبية الكهربائية وقطبية الروابط</h2>
+                    <p class="section-description">فهم العلاقة بين السالبية الكهربائية وقوى الترابط</p>
+                </div>
+
+                <div class="definition-card" data-aos="zoom-in">
+                    <h3>ما هي السالبية الكهربائية؟</h3>
+                    <p>هي قدرة الذرة على جذب الإلكترونات المشتركة في الرابطة التساهمية نحوها. كلما زادت السالبية الكهربائية، زادت قدرة الذرة على جذب الإلكترونات.</p>
+                </div>
+
+                <!-- Electronegativity Values -->
+                <div class="en-values-section" data-aos="fade-up">
+                    <h3><i class="fas fa-table"></i> قيم السالبية الكهربائية (مقياس بولنج)</h3>
+
+                    <div class="en-cards-grid">
+                        <div class="en-card highest">
+                            <div class="en-element">F</div>
+                            <div class="en-value">3.98</div>
+                            <div class="en-name">الفلور</div>
+                            <div class="en-badge">الأعلى</div>
+                        </div>
+
+                        <div class="en-card high">
+                            <div class="en-element">O</div>
+                            <div class="en-value">3.44</div>
+                            <div class="en-name">الأكسجين</div>
+                        </div>
+
+                        <div class="en-card high">
+                            <div class="en-element">Cl</div>
+                            <div class="en-value">3.16</div>
+                            <div class="en-name">الكلور</div>
+                        </div>
+
+                        <div class="en-card high">
+                            <div class="en-element">N</div>
+                            <div class="en-value">3.04</div>
+                            <div class="en-name">النيتروجين</div>
+                        </div>
+
+                        <div class="en-card medium">
+                            <div class="en-element">H</div>
+                            <div class="en-value">2.20</div>
+                            <div class="en-name">الهيدروجين</div>
+                        </div>
+                    </div>
+
+                    <div class="en-periodic-table">
+                        <h4>السالبية الكهربائية في الجدول الدوري</h4>
+                        <canvas id="electronegativity-chart"></canvas>
+                        <div class="trend-indicators">
+                            <div class="trend">
+                                <i class="fas fa-arrow-up"></i>
+                                <p>تزداد من اليسار إلى اليمين</p>
+                            </div>
+                            <div class="trend">
+                                <i class="fas fa-arrow-down"></i>
+                                <p>تقل من الأعلى إلى الأسفل</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bond Polarity -->
+                <div class="polarity-section" data-aos="fade-up">
+                    <h3><i class="fas fa-magnet"></i> قطبية الروابط</h3>
+
+                    <div class="polarity-explanation">
+                        <p>فرق السالبية الكهربائية (ΔEN) يحدد نوع الرابطة وقطبيتها:</p>
+                    </div>
+
+                    <div class="polarity-scale">
+                        <div class="scale-item nonpolar">
+                            <div class="scale-header">
+                                <h4>رابطة غير قطبية</h4>
+                                <span class="delta-en">ΔEN < 0.4</span>
+                            </div>
+                            <p>التوزيع الإلكتروني متساوٍ</p>
+                            <div class="examples">
+                                <span class="molecule-badge">H-H</span>
+                                <span class="molecule-badge">Cl-Cl</span>
+                                <span class="molecule-badge">C-H</span>
+                            </div>
+                        </div>
+
+                        <div class="scale-item polar">
+                            <div class="scale-header">
+                                <h4>رابطة قطبية</h4>
+                                <span class="delta-en">0.4 < ΔEN < 1.7</span>
+                            </div>
+                            <p>التوزيع الإلكتروني غير متساوٍ</p>
+                            <div class="examples">
+                                <span class="molecule-badge">H-O</span>
+                                <span class="molecule-badge">H-N</span>
+                                <span class="molecule-badge">H-Cl</span>
+                            </div>
+                        </div>
+
+                        <div class="scale-item ionic">
+                            <div class="scale-header">
+                                <h4>رابطة أيونية</h4>
+                                <span class="delta-en">ΔEN > 1.7</span>
+                            </div>
+                            <p>انتقال كامل للإلكترونات</p>
+                            <div class="examples">
+                                <span class="molecule-badge">Na-Cl</span>
+                                <span class="molecule-badge">K-F</span>
+                                <span class="molecule-badge">Ca-O</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Calculator -->
+                    <div class="polarity-calculator">
+                        <h4><i class="fas fa-calculator"></i> حاسبة فرق السالبية الكهربائية</h4>
+                        <div class="calculator-interface">
+                            <div class="input-group">
+                                <label>الذرة الأولى:</label>
+                                <select id="atom1-select">
+                                    <option value="2.20">H (2.20)</option>
+                                    <option value="3.44">O (3.44)</option>
+                                    <option value="3.04">N (3.04)</option>
+                                    <option value="3.98">F (3.98)</option>
+                                    <option value="3.16">Cl (3.16)</option>
+                                    <option value="2.58">Br (2.58)</option>
+                                    <option value="2.66">S (2.66)</option>
+                                    <option value="2.55">C (2.55)</option>
+                                </select>
+                            </div>
+
+                            <div class="bond-symbol">—</div>
+
+                            <div class="input-group">
+                                <label>الذرة الثانية:</label>
+                                <select id="atom2-select">
+                                    <option value="3.44">O (3.44)</option>
+                                    <option value="2.20">H (2.20)</option>
+                                    <option value="3.04">N (3.04)</option>
+                                    <option value="3.98">F (3.98)</option>
+                                    <option value="3.16">Cl (3.16)</option>
+                                    <option value="2.58">Br (2.58)</option>
+                                    <option value="2.66">S (2.66)</option>
+                                    <option value="2.55">C (2.55)</option>
+                                </select>
+                            </div>
+
+                            <button class="btn-primary" onclick="calculatePolarity()">
+                                <i class="fas fa-calculator"></i> احسب
+                            </button>
+                        </div>
+
+                        <div class="calculator-result" id="polarity-result">
+                            <div class="result-card">
+                                <h5>النتيجة:</h5>
+                                <p class="delta-value">ΔEN = <span id="delta-value">-</span></p>
+                                <p class="bond-type">نوع الرابطة: <span id="bond-type">-</span></p>
+                                <div class="polarity-visual" id="polarity-visual"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Decision Tree -->
+                <div class="decision-tree-section" data-aos="fade-up">
+                    <h3><i class="fas fa-sitemap"></i> شجرة القرار: تحديد نوع القوة بين الجزيئات</h3>
+
+                    <div class="decision-tree">
+                        <div class="tree-node root">
+                            <div class="node-content">
+                                <p>هل يحتوي الجزيء على H مرتبط بـ F, O, أو N؟</p>
+                            </div>
+                            <div class="node-branches">
+                                <div class="branch yes">
+                                    <span class="branch-label">نعم</span>
+                                    <div class="tree-node result hydrogen">
+                                        <div class="node-content">
+                                            <i class="fas fa-link"></i>
+                                            <h4>رابطة هيدروجينية</h4>
+                                            <p>أقوى القوى بين الجزيئات</p>
+                                            <span class="strength">10-40 kJ/mol</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="branch no">
+                                    <span class="branch-label">لا</span>
+                                    <div class="tree-node">
+                                        <div class="node-content">
+                                            <p>هل الجزيء قطبي؟</p>
+                                        </div>
+                                        <div class="node-branches">
+                                            <div class="branch yes">
+                                                <span class="branch-label">نعم</span>
+                                                <div class="tree-node result dipole">
+                                                    <div class="node-content">
+                                                        <i class="fas fa-magnet"></i>
+                                                        <h4>قوى ثنائي القطب</h4>
+                                                        <p>قوى متوسطة</p>
+                                                        <span class="strength">2-10 kJ/mol</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="branch no">
+                                                <span class="branch-label">لا</span>
+                                                <div class="tree-node result london">
+                                                    <div class="node-content">
+                                                        <i class="fas fa-water"></i>
+                                                        <h4>قوى لندن</h4>
+                                                        <p>أضعف القوى</p>
+                                                        <span class="strength">0.05-40 kJ/mol</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="next-section-btn">
+                    <button class="btn-primary" onclick="navigateToSection('virtual-lab')">
+                        التالي: المختبر الافتراضي <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Section 6: Virtual Lab -->
+            <section id="virtual-lab" class="content-section">
+                <div class="section-header" data-aos="fade-down">
+                    <h2><i class="fas fa-flask"></i> المختبر الافتراضي</h2>
+                    <p class="section-description">جرب وقارن الجزيئات المختلفة واكتشف خصائصها</p>
+                </div>
+
+                <div class="lab-interface">
+                    <!-- Molecule Builder -->
+                    <div class="lab-section" data-aos="fade-up">
+                        <h3><i class="fas fa-atom"></i> بناء الجزيئات</h3>
+                        <div class="molecule-builder">
+                            <div class="builder-controls">
+                                <h4>اختر الجزيء:</h4>
+                                <div class="molecule-buttons">
+                                    <button class="molecule-btn" data-molecule="H2O">
+                                        H₂O <small>(الماء)</small>
+                                    </button>
+                                    <button class="molecule-btn" data-molecule="NH3">
+                                        NH₃ <small>(الأمونيا)</small>
+                                    </button>
+                                    <button class="molecule-btn" data-molecule="HF">
+                                        HF <small>(فلوريد الهيدروجين)</small>
+                                    </button>
+                                    <button class="molecule-btn" data-molecule="HCl">
+                                        HCl <small>(حمض الهيدروكلوريك)</small>
+                                    </button>
+                                    <button class="molecule-btn" data-molecule="CH4">
+                                        CH₄ <small>(الميثان)</small>
+                                    </button>
+                                    <button class="molecule-btn" data-molecule="CO2">
+                                        CO₂ <small>(ثاني أكسيد الكربون)</small>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="builder-display">
+                                <div class="molecule-3d-container">
+                                    <div id="lab-molecule-3d" class="model-3d large"></div>
+                                </div>
+
+                                <div class="molecule-properties">
+                                    <h4>خصائص الجزيء المختار:</h4>
+                                    <div class="properties-list" id="molecule-properties">
+                                        <div class="property-item">
+                                            <span class="prop-label">الصيغة:</span>
+                                            <span class="prop-value" id="prop-formula">-</span>
+                                        </div>
+                                        <div class="property-item">
+                                            <span class="prop-label">نوع القوة:</span>
+                                            <span class="prop-value" id="prop-force">-</span>
+                                        </div>
+                                        <div class="property-item">
+                                            <span class="prop-label">درجة الغليان:</span>
+                                            <span class="prop-value" id="prop-bp">-</span>
+                                        </div>
+                                        <div class="property-item">
+                                            <span class="prop-label">القطبية:</span>
+                                            <span class="prop-value" id="prop-polarity">-</span>
+                                        </div>
+                                        <div class="property-item">
+                                            <span class="prop-label">الشكل:</span>
+                                            <span class="prop-value" id="prop-shape">-</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Mode -->
+                    <div class="lab-section" data-aos="fade-up">
+                        <h3><i class="fas fa-balance-scale"></i> وضع المقارنة</h3>
+                        <div class="comparison-interface">
+                            <div class="comparison-selectors">
+                                <div class="selector-group">
+                                    <label>الجزيء الأول:</label>
+                                    <select id="compare-molecule-1" class="comparison-select">
+                                        <option value="H2O">H₂O (الماء)</option>
+                                        <option value="H2S">H₂S</option>
+                                        <option value="NH3">NH₃ (الأمونيا)</option>
+                                        <option value="PH3">PH₃</option>
+                                        <option value="HF">HF</option>
+                                        <option value="HCl">HCl</option>
+                                        <option value="HBr">HBr</option>
+                                        <option value="HI">HI</option>
+                                    </select>
+                                </div>
+
+                                <div class="vs-indicator">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+
+                                <div class="selector-group">
+                                    <label>الجزيء الثاني:</label>
+                                    <select id="compare-molecule-2" class="comparison-select">
+                                        <option value="H2S">H₂S</option>
+                                        <option value="H2O">H₂O (الماء)</option>
+                                        <option value="NH3">NH₃ (الأمونيا)</option>
+                                        <option value="PH3">PH₃</option>
+                                        <option value="HF">HF</option>
+                                        <option value="HCl">HCl</option>
+                                        <option value="HBr">HBr</option>
+                                        <option value="HI">HI</option>
+                                    </select>
+                                </div>
+
+                                <button class="btn-primary" onclick="compareMolecules()">
+                                    <i class="fas fa-search"></i> قارن
+                                </button>
+                            </div>
+
+                            <div class="comparison-results" id="comparison-results">
+                                <div class="comparison-grid">
+                                    <div class="comparison-col">
+                                        <h4 id="comp-name-1">الجزيء 1</h4>
+                                        <div class="comp-3d" id="comp-3d-1"></div>
+                                        <div class="comp-data" id="comp-data-1"></div>
+                                    </div>
+
+                                    <div class="comparison-col">
+                                        <h4 id="comp-name-2">الجزيء 2</h4>
+                                        <div class="comp-3d" id="comp-3d-2"></div>
+                                        <div class="comp-data" id="comp-data-2"></div>
+                                    </div>
+                                </div>
+
+                                <div class="comparison-chart">
+                                    <h5>مقارنة الخصائص:</h5>
+                                    <canvas id="comparison-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Temperature Simulator -->
+                    <div class="lab-section" data-aos="fade-up">
+                        <h3><i class="fas fa-temperature-high"></i> محاكي درجة الحرارة</h3>
+                        <div class="temperature-simulator">
+                            <div class="simulator-controls">
+                                <div class="control-group">
+                                    <label>اختر المادة:</label>
+                                    <select id="temp-substance">
+                                        <option value="water">ماء (H₂O)</option>
+                                        <option value="ammonia">أمونيا (NH₃)</option>
+                                        <option value="methane">ميثان (CH₄)</option>
+                                    </select>
+                                </div>
+
+                                <div class="control-group">
+                                    <label>درجة الحرارة: <span id="temp-value">25</span>°C</label>
+                                    <input type="range" id="temp-slider" min="-100" max="150" value="25" step="5">
+                                    <div class="temp-indicators">
+                                        <span class="temp-mark">-100°C</span>
+                                        <span class="temp-mark">0°C</span>
+                                        <span class="temp-mark">100°C</span>
+                                        <span class="temp-mark">150°C</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="simulator-display">
+                                <div class="state-visualization" id="state-viz">
+                                    <div class="molecules-container"></div>
+                                </div>
+                                <div class="state-info">
+                                    <h4>الحالة الفيزيائية: <span id="current-state">سائل</span></h4>
+                                    <p id="state-description">الجزيئات قريبة من بعضها وتتحرك بحرية نسبياً</p>
+                                    <div class="kinetic-energy">
+                                        <span>الطاقة الحركية:</span>
+                                        <div class="energy-bar">
+                                            <div class="energy-fill" id="kinetic-fill"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="next-section-btn">
+                    <button class="btn-primary" onclick="navigateToSection('quiz')">
+                        التالي: الاختبار التفاعلي <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Section 7: Quiz -->
+            <section id="quiz" class="content-section">
+                <div class="section-header" data-aos="fade-down">
+                    <h2><i class="fas fa-question-circle"></i> الاختبار التفاعلي</h2>
+                    <p class="section-description">اختبر معلوماتك واحصل على التغذية الراجعة الفورية</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-progress">
+                        <div class="progress-info">
+                            <span>السؤال <span id="current-question">1</span> من <span id="total-questions">10</span></span>
+                            <span>النقاط: <span id="quiz-score">0</span></span>
+                        </div>
+                        <div class="quiz-progress-bar">
+                            <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                        </div>
+                    </div>
+
+                    <div class="quiz-content" id="quiz-content">
+                        <!-- Questions will be loaded here dynamically -->
+                    </div>
+
+                    <div class="quiz-navigation">
+                        <button class="btn-secondary" id="prev-question" disabled>
+                            <i class="fas fa-arrow-right"></i> السابق
+                        </button>
+                        <button class="btn-primary" id="next-question">
+                            التالي <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button class="btn-success" id="submit-quiz" style="display: none;">
+                            <i class="fas fa-check"></i> إنهاء الاختبار
+                        </button>
+                    </div>
+
+                    <div class="quiz-results" id="quiz-results" style="display: none;">
+                        <!-- Results will be shown here -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>حول الدرس</h4>
+                    <p>درس تفاعلي شامل عن قوى الترابط بين الجزيئات للصف الحادي عشر</p>
+                </div>
+                <div class="footer-section">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#intro">المقدمة</a></li>
+                        <li><a href="#van-der-waals">قوى فان دير فالس</a></li>
+                        <li><a href="#hydrogen-bond">الرابطة الهيدروجينية</a></li>
+                        <li><a href="#quiz">الاختبار</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>تواصل معنا</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 منصة التعليم التفاعلية. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <!-- AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <!-- Main JavaScript Files -->
+    <script src="js/main.js"></script>
+    <script src="js/3d-models.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/quiz.js"></script>
+</body>
+</html>
