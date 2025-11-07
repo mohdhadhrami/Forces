@@ -602,6 +602,49 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // =====================================================
+// ICE VS LIQUID WATER INTERACTIVE DEMO
+// =====================================================
+document.addEventListener('DOMContentLoaded', () => {
+    const demoButtons = document.querySelectorAll('.btn-demo[data-state]');
+    const vizContainer = document.getElementById('water-state-visualization');
+
+    if (demoButtons.length > 0 && vizContainer) {
+        // Initialize with ice structure
+        if (typeof createIceStructure === 'function') {
+            createIceStructure('water-state-visualization');
+        }
+
+        demoButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const state = button.getAttribute('data-state');
+
+                // Update active button
+                demoButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Clear existing visualization
+                vizContainer.innerHTML = '';
+
+                // Create appropriate visualization
+                if (state === 'ice') {
+                    if (typeof createIceStructure === 'function') {
+                        createIceStructure('water-state-visualization');
+                    } else {
+                        console.error('createIceStructure function not found');
+                    }
+                } else if (state === 'liquid') {
+                    if (typeof createLiquidWaterStructure === 'function') {
+                        createLiquidWaterStructure('water-state-visualization');
+                    } else {
+                        console.error('createLiquidWaterStructure function not found');
+                    }
+                }
+            });
+        });
+    }
+});
+
+// =====================================================
 // PROGRESS PERSISTENCE
 // =====================================================
 function saveProgress() {

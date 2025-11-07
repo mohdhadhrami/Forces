@@ -674,6 +674,162 @@ function createDipoleDemo(containerId) {
 }
 
 /**
+ * Create Ice Structure visualization (hexagonal crystalline)
+ */
+function createIceStructure(containerId) {
+    if (!isThreeJSLoaded()) {
+        console.warn('Three.js not loaded for', containerId);
+        return;
+    }
+
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    const { scene, camera, renderer } = createScene(container);
+    camera.position.z = 12;
+
+    // Create hexagonal ice structure
+    const waterMolecules = [];
+    const hBonds = [];
+
+    // Hexagonal lattice parameters
+    const latticeSpacing = 3;
+    const layers = 2;
+
+    for (let layer = 0; layer < layers; layer++) {
+        for (let i = 0; i < 6; i++) {
+            const angle = (i * 60) * (Math.PI / 180);
+            const x = Math.cos(angle) * latticeSpacing;
+            const y = layer * 2.5 - 1;
+            const z = Math.sin(angle) * latticeSpacing;
+
+            // Create water molecule (simplified as a sphere)
+            const molecule = createAtom(0.4, 0x4dabf7);
+            molecule.position.set(x, y, z);
+            scene.add(molecule);
+            waterMolecules.push(molecule);
+
+            // Add hydrogen bonds (dashed lines)
+            if (i > 0) {
+                const prevMolecule = waterMolecules[waterMolecules.length - 2];
+                const bondGeometry = new THREE.BufferGeometry().setFromPoints([
+                    prevMolecule.position,
+                    molecule.position
+                ]);
+                const bondMaterial = new THREE.LineDashedMaterial({
+                    color: 0xffff00,
+                    dashSize: 0.2,
+                    gapSize: 0.1
+                });
+                const bond = new THREE.Line(bondGeometry, bondMaterial);
+                bond.computeLineDistances();
+                scene.add(bond);
+                hBonds.push(bond);
+            }
+        }
+
+        // Center molecule
+        if (layer === 0) {
+            const centerMolecule = createAtom(0.4, 0xff6b6b);
+            centerMolecule.position.set(0, layer * 2.5 - 1, 0);
+            scene.add(centerMolecule);
+            waterMolecules.push(centerMolecule);
+        }
+    }
+
+    addMouseControls(container, camera, renderer, scene);
+
+    function animate() {
+        requestAnimationFrame(animate);
+        scene.rotation.y += 0.003;
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    activeScenes.push({ renderer, container });
+}
+
+/**
+ * Create Liquid Water Structure visualization (random, compact)
+ */
+function createLiquidWaterStructure(containerId) {
+    if (!isThreeJSLoaded()) {
+        console.warn('Three.js not loaded for', containerId);
+        return;
+    }
+
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    const { scene, camera, renderer } = createScene(container);
+    camera.position.z = 12;
+
+    // Create random liquid water molecules
+    const waterMolecules = [];
+    const moleculeCount = 20;
+
+    for (let i = 0; i < moleculeCount; i++) {
+        // Random positions in a more compact volume
+        const x = (Math.random() - 0.5) * 6;
+        const y = (Math.random() - 0.5) * 6;
+        const z = (Math.random() - 0.5) * 6;
+
+        const molecule = createAtom(0.35, 0x4dabf7);
+        molecule.position.set(x, y, z);
+        scene.add(molecule);
+        waterMolecules.push(molecule);
+    }
+
+    // Add some temporary hydrogen bonds between nearby molecules
+    for (let i = 0; i < waterMolecules.length; i++) {
+        for (let j = i + 1; j < waterMolecules.length; j++) {
+            const distance = waterMolecules[i].position.distanceTo(waterMolecules[j].position);
+            if (distance < 2 && Math.random() > 0.7) {
+                const bondGeometry = new THREE.BufferGeometry().setFromPoints([
+                    waterMolecules[i].position,
+                    waterMolecules[j].position
+                ]);
+                const bondMaterial = new THREE.LineDashedMaterial({
+                    color: 0xffff00,
+                    dashSize: 0.15,
+                    gapSize: 0.15,
+                    transparent: true,
+                    opacity: 0.5
+                });
+                const bond = new THREE.Line(bondGeometry, bondMaterial);
+                bond.computeLineDistances();
+                scene.add(bond);
+            }
+        }
+    }
+
+    addMouseControls(container, camera, renderer, scene);
+
+    let time = 0;
+    function animate() {
+        requestAnimationFrame(animate);
+        time += 0.01;
+
+        // Add slight movement to simulate liquid motion
+        waterMolecules.forEach((molecule, index) => {
+            molecule.position.x += Math.sin(time + index) * 0.003;
+            molecule.position.y += Math.cos(time + index * 1.5) * 0.003;
+            molecule.position.z += Math.sin(time + index * 0.7) * 0.003;
+        });
+
+        scene.rotation.y += 0.003;
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    activeScenes.push({ renderer, container });
+}
+
+/**
  * Cleanup function
  */
 function cleanup3DModels() {
@@ -695,6 +851,8 @@ window.createHFMolecule = createHFMolecule;
 window.createGenericMolecule = createGenericMolecule;
 window.createLondonForcesDemo = createLondonForcesDemo;
 window.createDipoleDemo = createDipoleDemo;
+window.createIceStructure = createIceStructure;
+window.createLiquidWaterStructure = createLiquidWaterStructure;
 window.cleanup3DModels = cleanup3DModels;
 
 console.log('✅ 3D Models module loaded!');
