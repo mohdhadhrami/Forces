@@ -21,6 +21,100 @@ let sectionProgress = {
 };
 let unlockedBadges = [];
 
+// Molecule Database
+const moleculeDatabase = {
+    'H2O': {
+        name: 'الماء',
+        formula: 'H₂O',
+        force: 'رابطة هيدروجينية',
+        boilingPoint: 100,
+        polarity: 'قطبي',
+        shape: 'منحنية (104.5°)',
+        description: 'الماء جزيء قطبي يحتوي على روابط هيدروجينية قوية'
+    },
+    'NH3': {
+        name: 'الأمونيا',
+        formula: 'NH₃',
+        force: 'رابطة هيدروجينية',
+        boilingPoint: -33,
+        polarity: 'قطبي',
+        shape: 'هرم ثلاثي (107°)',
+        description: 'الأمونيا جزيء قطبي مع روابط هيدروجينية'
+    },
+    'HF': {
+        name: 'فلوريد الهيدروجين',
+        formula: 'HF',
+        force: 'رابطة هيدروجينية',
+        boilingPoint: 20,
+        polarity: 'قطبي جداً',
+        shape: 'خطي',
+        description: 'HF له أقوى رابطة هيدروجينية بسبب كهرسلبية الفلور العالية'
+    },
+    'HCl': {
+        name: 'كلوريد الهيدروجين',
+        formula: 'HCl',
+        force: 'ثنائي القطب - ثنائي القطب',
+        boilingPoint: -85,
+        polarity: 'قطبي',
+        shape: 'خطي',
+        description: 'HCl جزيء قطبي مع قوى ثنائي القطب'
+    },
+    'CH4': {
+        name: 'الميثان',
+        formula: 'CH₄',
+        force: 'قوى لندن',
+        boilingPoint: -164,
+        polarity: 'غير قطبي',
+        shape: 'رباعي السطوح',
+        description: 'الميثان جزيء غير قطبي مع قوى لندن فقط'
+    },
+    'CO2': {
+        name: 'ثاني أكسيد الكربون',
+        formula: 'CO₂',
+        force: 'قوى لندن',
+        boilingPoint: -78,
+        polarity: 'غير قطبي',
+        shape: 'خطي',
+        description: 'CO₂ جزيء خطي غير قطبي'
+    },
+    'H2S': {
+        name: 'كبريتيد الهيدروجين',
+        formula: 'H₂S',
+        force: 'ثنائي القطب - ثنائي القطب',
+        boilingPoint: -60,
+        polarity: 'قطبي ضعيف',
+        shape: 'منحنية',
+        description: 'H₂S جزيء قطبي مع قوى ثنائي القطب'
+    },
+    'PH3': {
+        name: 'فوسفين',
+        formula: 'PH₃',
+        force: 'ثنائي القطب - ثنائي القطب',
+        boilingPoint: -88,
+        polarity: 'قطبي ضعيف',
+        shape: 'هرم ثلاثي',
+        description: 'PH₃ جزيء قطبي مع قوى ثنائي القطب ضعيفة'
+    },
+    'HBr': {
+        name: 'بروميد الهيدروجين',
+        formula: 'HBr',
+        force: 'ثنائي القطب - ثنائي القطب',
+        boilingPoint: -67,
+        polarity: 'قطبي',
+        shape: 'خطي',
+        description: 'HBr جزيء قطبي مع قوى ثنائي القطب'
+    },
+    'HI': {
+        name: 'يوديد الهيدروجين',
+        formula: 'HI',
+        force: 'ثنائي القطب - ثنائي القطب',
+        boilingPoint: -35,
+        polarity: 'قطبي ضعيف',
+        shape: 'خطي',
+        description: 'HI جزيء قطبي مع قوى ثنائي القطب'
+    }
+};
+
 // =====================================================
 // INITIALIZATION
 // =====================================================
@@ -491,10 +585,18 @@ function calculatePolarity() {
 // MOLECULE COMPARISON
 // =====================================================
 function compareMolecules() {
-    const molecule1 = document.getElementById('compare-molecule-1').value;
-    const molecule2 = document.getElementById('compare-molecule-2').value;
+    const molecule1Key = document.getElementById('compare-molecule-1').value;
+    const molecule2Key = document.getElementById('compare-molecule-2').value;
 
-    console.log(`Comparing ${molecule1} vs ${molecule2}`);
+    const molecule1 = moleculeDatabase[molecule1Key];
+    const molecule2 = moleculeDatabase[molecule2Key];
+
+    if (!molecule1 || !molecule2) {
+        showNotification('خطأ في اختيار الجزيئات', 'error');
+        return;
+    }
+
+    console.log(`Comparing ${molecule1Key} vs ${molecule2Key}`);
 
     const comparisonResults = document.getElementById('comparison-results');
     if (comparisonResults) {
@@ -503,8 +605,85 @@ function compareMolecules() {
     }
 
     // Update names
-    document.getElementById('comp-name-1').textContent = molecule1;
-    document.getElementById('comp-name-2').textContent = molecule2;
+    document.getElementById('comp-name-1').textContent = molecule1.formula + ' (' + molecule1.name + ')';
+    document.getElementById('comp-name-2').textContent = molecule2.formula + ' (' + molecule2.name + ')';
+
+    // Update data
+    const compData1 = document.getElementById('comp-data-1');
+    const compData2 = document.getElementById('comp-data-2');
+
+    if (compData1) {
+        compData1.innerHTML = `
+            <div class="comp-property"><strong>نوع القوة:</strong> ${molecule1.force}</div>
+            <div class="comp-property"><strong>درجة الغليان:</strong> ${molecule1.boilingPoint}°C</div>
+            <div class="comp-property"><strong>القطبية:</strong> ${molecule1.polarity}</div>
+            <div class="comp-property"><strong>الشكل:</strong> ${molecule1.shape}</div>
+        `;
+    }
+
+    if (compData2) {
+        compData2.innerHTML = `
+            <div class="comp-property"><strong>نوع القوة:</strong> ${molecule2.force}</div>
+            <div class="comp-property"><strong>درجة الغليان:</strong> ${molecule2.boilingPoint}°C</div>
+            <div class="comp-property"><strong>القطبية:</strong> ${molecule2.polarity}</div>
+            <div class="comp-property"><strong>الشكل:</strong> ${molecule2.shape}</div>
+        `;
+    }
+
+    // Create comparison chart if Chart.js is available
+    if (typeof Chart !== 'undefined') {
+        const compChart = document.getElementById('comparison-chart');
+        if (compChart) {
+            const ctx = compChart.getContext('2d');
+
+            // Destroy old chart if exists
+            if (window.comparisonChartInstance) {
+                window.comparisonChartInstance.destroy();
+            }
+
+            window.comparisonChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['درجة الغليان (°C)'],
+                    datasets: [{
+                        label: molecule1.formula,
+                        data: [molecule1.boilingPoint],
+                        backgroundColor: 'rgba(52, 152, 219, 0.8)',
+                        borderColor: '#3498DB',
+                        borderWidth: 2
+                    }, {
+                        label: molecule2.formula,
+                        data: [molecule2.boilingPoint],
+                        backgroundColor: 'rgba(231, 76, 60, 0.8)',
+                        borderColor: '#E74C3C',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                font: { family: 'Cairo' }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                font: { family: 'Cairo' }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: { family: 'Cairo' }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
 
     // Add points
     updateScore(15);
@@ -740,6 +919,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial reset to set up the tree
     resetTree();
+});
+
+// =====================================================
+// VIRTUAL LAB - MOLECULE BUILDER
+// =====================================================
+document.addEventListener('DOMContentLoaded', () => {
+    const moleculeButtons = document.querySelectorAll('.molecule-btn');
+
+    moleculeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const moleculeKey = button.getAttribute('data-molecule');
+            const moleculeData = moleculeDatabase[moleculeKey];
+
+            if (moleculeData) {
+                // Update active button
+                moleculeButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Update properties display
+                document.getElementById('prop-formula').textContent = moleculeData.formula;
+                document.getElementById('prop-force').textContent = moleculeData.force;
+                document.getElementById('prop-bp').textContent = moleculeData.boilingPoint + '°C';
+                document.getElementById('prop-polarity').textContent = moleculeData.polarity;
+                document.getElementById('prop-shape').textContent = moleculeData.shape;
+
+                // Update 3D model
+                const labMolecule3d = document.getElementById('lab-molecule-3d');
+                if (labMolecule3d) {
+                    labMolecule3d.innerHTML = '';
+
+                    // Call appropriate 3D model function
+                    if (moleculeKey === 'H2O' && typeof createWaterMolecule === 'function') {
+                        createWaterMolecule('lab-molecule-3d');
+                    } else if (moleculeKey === 'NH3' && typeof createAmmoniaMolecule === 'function') {
+                        createAmmoniaMolecule('lab-molecule-3d');
+                    } else if (moleculeKey === 'HF' && typeof createHFMolecule === 'function') {
+                        createHFMolecule('lab-molecule-3d');
+                    } else if (typeof createGenericMolecule === 'function') {
+                        createGenericMolecule('lab-molecule-3d', moleculeKey.toLowerCase());
+                    }
+                }
+
+                showNotification(`تم اختيار ${moleculeData.name}`, 'success');
+                updateScore(5);
+            }
+        });
+    });
 });
 
 // =====================================================
