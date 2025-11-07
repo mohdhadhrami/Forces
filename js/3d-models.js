@@ -108,8 +108,8 @@ function initializeFallbackModels() {
  * Create a basic Three.js scene
  */
 function createScene(container) {
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    const width = container.clientWidth || 400;
+    const height = container.clientHeight || 400;
 
     // Scene
     const scene = new THREE.Scene();

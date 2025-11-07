@@ -242,6 +242,39 @@ function initializeTabs() {
             const targetContent = tabsContainer.querySelector(`#${tabName}-tab`);
             if (targetContent) {
                 targetContent.classList.add('active');
+
+                // Re-initialize 3D models in the newly visible tab
+                setTimeout(() => {
+                    const models = targetContent.querySelectorAll('.model-3d');
+                    models.forEach(modelContainer => {
+                        if (modelContainer.id && modelContainer.children.length === 0) {
+                            const containerId = modelContainer.id;
+                            console.log(`🔄 Re-initializing 3D model: ${containerId}`);
+
+                            if (containerId.includes('water') || containerId.includes('h2o')) {
+                                if (typeof createWaterMolecule === 'function') {
+                                    createWaterMolecule(containerId);
+                                }
+                            } else if (containerId.includes('ammonia') || containerId.includes('nh3')) {
+                                if (typeof createAmmoniaMolecule === 'function') {
+                                    createAmmoniaMolecule(containerId);
+                                }
+                            } else if (containerId.includes('hf')) {
+                                if (typeof createHFMolecule === 'function') {
+                                    createHFMolecule(containerId);
+                                }
+                            } else if (containerId.includes('london')) {
+                                if (typeof createLondonForcesDemo === 'function') {
+                                    createLondonForcesDemo(containerId);
+                                }
+                            } else if (containerId.includes('dipole')) {
+                                if (typeof createDipoleDemo === 'function') {
+                                    createDipoleDemo(containerId);
+                                }
+                            }
+                        }
+                    });
+                }, 100); // Small delay to ensure tab is fully visible
             }
         });
     });
