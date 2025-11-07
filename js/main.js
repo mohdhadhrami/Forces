@@ -645,6 +645,104 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // =====================================================
+// INTERACTIVE DECISION TREE
+// =====================================================
+document.addEventListener('DOMContentLoaded', () => {
+    const decisionTree = document.getElementById('decision-tree');
+    const resetBtn = document.getElementById('tree-reset-btn');
+
+    if (!decisionTree || !resetBtn) return;
+
+    // Function to reset the tree
+    function resetTree() {
+        // Hide all child nodes
+        const allNodes = decisionTree.querySelectorAll('.tree-node:not(.root)');
+        allNodes.forEach(node => {
+            node.classList.remove('active');
+        });
+
+        // Show all branches of the root node
+        const rootBranches = decisionTree.querySelectorAll('.tree-node.root > .node-branches > .branch');
+        rootBranches.forEach(branch => {
+            branch.classList.remove('hidden');
+        });
+    }
+
+    // Function to handle branch clicks
+    function handleBranchClick(branch) {
+        // Find the next tree node within this branch
+        const nextNode = branch.querySelector('.tree-node');
+
+        if (nextNode) {
+            // Check if this is a final result node
+            const isResult = nextNode.classList.contains('result');
+
+            if (isResult) {
+                // Show the result with animation
+                setTimeout(() => {
+                    nextNode.classList.add('active');
+                }, 100);
+            } else {
+                // Show the next question
+                setTimeout(() => {
+                    nextNode.classList.add('active');
+                }, 100);
+
+                // Add click handlers to the next level branches
+                const nextBranches = nextNode.querySelectorAll(':scope > .node-branches > .branch');
+                nextBranches.forEach(nextBranch => {
+                    nextBranch.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        handleBranchClick(nextBranch);
+                    }, { once: true });
+                });
+            }
+
+            // Hide the sibling branch (the other option)
+            const parentBranches = branch.parentElement;
+            if (parentBranches) {
+                const allBranches = parentBranches.querySelectorAll(':scope > .branch');
+                allBranches.forEach(b => {
+                    if (b !== branch) {
+                        b.classList.add('hidden');
+                    }
+                });
+            }
+        }
+    }
+
+    // Initialize: Add click handlers to root branches
+    const rootBranches = decisionTree.querySelectorAll('.tree-node.root > .node-branches > .branch');
+    rootBranches.forEach(branch => {
+        branch.addEventListener('click', (e) => {
+            e.stopPropagation();
+            handleBranchClick(branch);
+        }, { once: true });
+    });
+
+    // Reset button handler
+    resetBtn.addEventListener('click', () => {
+        resetTree();
+
+        // Re-initialize click handlers
+        const rootBranches = decisionTree.querySelectorAll('.tree-node.root > .node-branches > .branch');
+        rootBranches.forEach(branch => {
+            // Remove old listeners by cloning
+            const newBranch = branch.cloneNode(true);
+            branch.parentNode.replaceChild(newBranch, branch);
+
+            newBranch.addEventListener('click', (e) => {
+                e.stopPropagation();
+                handleBranchClick(newBranch);
+            }, { once: true });
+        });
+    });
+
+    // Initial reset to set up the tree
+    resetTree();
+});
+
+// =====================================================
 // PROGRESS PERSISTENCE
 // =====================================================
 function saveProgress() {
