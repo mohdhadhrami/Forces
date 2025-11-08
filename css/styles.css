@@ -3990,6 +3990,7 @@ textarea:focus {
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     animation: border-glow 3s linear infinite;
+    pointer-events: none;
 }
 
 @keyframes border-glow {
@@ -4067,6 +4068,8 @@ textarea:focus {
     border-radius: var(--radius-lg);
     margin: var(--spacing-lg);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 1;
 }
 
 .question-badge {
@@ -4172,6 +4175,8 @@ textarea:focus {
     background: linear-gradient(135deg, rgba(46, 204, 113, 0.05), rgba(52, 152, 219, 0.05));
     border-radius: var(--radius-lg);
     border: 2px dashed var(--secondary-color);
+    position: relative;
+    z-index: 1;
 }
 
 .attempt-title {
