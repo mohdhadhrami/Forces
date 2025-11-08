@@ -92,6 +92,231 @@
 }
 
 /* ============================================
+   DARK MODE COMPREHENSIVE TEXT FIXES
+   ============================================ */
+
+.dark-mode {
+    color: var(--text-primary);
+}
+
+/* Fix all headings */
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6 {
+    color: #f0f0f0 !important;
+}
+
+/* Fix all paragraphs and text */
+.dark-mode p,
+.dark-mode li,
+.dark-mode span,
+.dark-mode label,
+.dark-mode a {
+    color: var(--text-primary);
+}
+
+/* Fix strong and em elements */
+.dark-mode strong,
+.dark-mode b,
+.dark-mode em {
+    color: #f5f5f5;
+}
+
+/* Fix cards and info boxes */
+.dark-mode .info-card,
+.dark-mode .example-card,
+.dark-mode .comparison-card,
+.dark-mode .property-card {
+    background: var(--bg-card);
+    color: var(--text-primary);
+}
+
+.dark-mode .info-card p,
+.dark-mode .example-card p,
+.dark-mode .comparison-card p {
+    color: var(--text-primary) !important;
+}
+
+/* Fix question cards */
+.dark-mode .question-card,
+.dark-mode .interactive-question-card {
+    background: var(--bg-card);
+}
+
+.dark-mode .question-text,
+.dark-mode .question-text-big,
+.dark-mode .answer-point p {
+    color: var(--text-primary) !important;
+}
+
+/* Fix labels and small text */
+.dark-mode .small-text,
+.dark-mode .intro-text,
+.dark-mode .section-description {
+    color: var(--text-secondary) !important;
+}
+
+/* Fix buttons */
+.dark-mode .btn-primary,
+.dark-mode .attempt-btn,
+.dark-mode .icon-btn {
+    color: white;
+}
+
+/* Fix feature lists */
+.dark-mode .feature-list li,
+.dark-mode .stat-detail p,
+.dark-mode .point-content p {
+    color: var(--text-secondary) !important;
+}
+
+/* Fix comparison boxes */
+.dark-mode .comparison-box,
+.dark-mode .conclusion-note {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .conclusion-note p,
+.dark-mode .comparison-item p {
+    color: var(--text-primary) !important;
+}
+
+/* Fix radius values */
+.dark-mode .radius-value {
+    color: #f0f0f0 !important;
+}
+
+/* Fix electronegativity comparison */
+.dark-mode .element-value,
+.dark-mode .element-symbol {
+    color: white !important;
+}
+
+.dark-mode .vs-text {
+    color: #ccc !important;
+}
+
+/* Fix mystery note and encouragement */
+.dark-mode .mystery-note,
+.dark-mode .encouragement-message p,
+.dark-mode .attempt-subtitle {
+    color: var(--text-primary) !important;
+}
+
+/* Fix answer sections */
+.dark-mode .answer-intro p,
+.dark-mode .answer-point strong,
+.dark-mode .explanation-point p {
+    color: var(--text-primary) !important;
+}
+
+/* Fix insight boxes */
+.dark-mode .insight-text,
+.dark-mode .key-insight-box p {
+    color: var(--text-primary) !important;
+}
+
+/* Fix network stats */
+.dark-mode .network-stats p,
+.dark-mode .stat-item strong {
+    color: var(--text-primary) !important;
+}
+
+/* Fix molecule labels in cards */
+.dark-mode .molecule-icon,
+.dark-mode .network-header h4 {
+    color: white !important;
+}
+
+/* Fix chart notes and labels */
+.dark-mode .chart-note p,
+.dark-mode .chart-card h4 {
+    color: var(--text-primary) !important;
+}
+
+/* Fix quiz elements */
+.dark-mode .quiz-question,
+.dark-mode .quiz-option label,
+.dark-mode .explanation-text {
+    color: var(--text-primary) !important;
+}
+
+/* Fix footer */
+.dark-mode .footer-section h4,
+.dark-mode .footer-section p,
+.dark-mode .footer-section a,
+.dark-mode .footer-bottom p {
+    color: var(--text-secondary) !important;
+}
+
+/* Fix sidebar navigation */
+.dark-mode .nav-item span {
+    color: var(--text-primary) !important;
+}
+
+.dark-mode .nav-item.active span {
+    color: white !important;
+}
+
+/* Fix property boxes */
+.dark-mode .property-box strong,
+.dark-mode .property-box p {
+    color: #f0f0f0 !important;
+}
+
+/* Fix specific colored backgrounds */
+.dark-mode .success {
+    background: rgba(39, 174, 96, 0.2) !important;
+}
+
+.dark-mode .danger {
+    background: rgba(231, 76, 60, 0.2) !important;
+}
+
+.dark-mode .warning {
+    background: rgba(243, 156, 18, 0.2) !important;
+}
+
+/* Fix table text */
+.dark-mode table,
+.dark-mode th,
+.dark-mode td {
+    color: var(--text-primary) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Fix select and input elements */
+.dark-mode select,
+.dark-mode input,
+.dark-mode textarea {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode select option {
+    background: var(--bg-card);
+    color: var(--text-primary);
+}
+
+/* Fix badge and tag elements */
+.dark-mode .badge,
+.dark-mode .tag,
+.dark-mode .molecule-badge {
+    color: white;
+}
+
+/* Fix achievement cards */
+.dark-mode .achievement-card p,
+.dark-mode .achievement-card h5 {
+    color: var(--text-primary) !important;
+}
+
+/* ============================================
    RESET & BASE STYLES
    ============================================ */
 * {
