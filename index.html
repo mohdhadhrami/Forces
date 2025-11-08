@@ -1430,22 +1430,84 @@
                     </div>
                 </div>
 
-                <!-- Chlorine Question -->
-                <div class="info-card question-card" data-aos="fade-up">
-                    <div class="question-header">
-                        <i class="fas fa-question-circle"></i>
-                        <h3>سؤال مهم: لماذا لا يُعد الكلور من الشروط الأساسية للرابطة الهيدروجينية؟</h3>
+                <!-- Interactive Chlorine Question -->
+                <div class="info-card interactive-question-card" id="chlorine-question" data-aos="fade-up">
+                    <div class="mystery-header">
+                        <div class="mystery-icon-wrapper">
+                            <i class="fas fa-brain mystery-icon"></i>
+                            <i class="fas fa-question mystery-icon-small"></i>
+                        </div>
+                        <h3 class="mystery-title">🧪 لغز كيميائي مثير للتفكير!</h3>
                     </div>
 
                     <div class="question-content">
-                        <p class="question-text">
-                            رغم أن الكلور (Cl) له سالبية كهربائية عالية (3.16) وهي أعلى من النيتروجين (3.04)، إلا أنه <strong>لا يُشكل روابط هيدروجينية قوية</strong> مثل F, O, N. لماذا؟
-                        </p>
+                        <div class="question-box">
+                            <div class="question-badge">
+                                <i class="fas fa-flask"></i>
+                                <span>تحدي معرفي</span>
+                            </div>
+                            <p class="question-text-big">
+                                <strong>لماذا لا يُعد الكلور من الشروط الأساسية للرابطة الهيدروجينية رغم أن كهرسلبيته (3.16) أعلى من النيتروجين (3.04)؟</strong>
+                            </p>
 
-                        <div class="answer-section">
-                            <h4><i class="fas fa-lightbulb"></i> الإجابة:</h4>
+                            <div class="electronegativity-comparison">
+                                <div class="element-compare">
+                                    <div class="element-box chlorine">
+                                        <span class="element-symbol">Cl</span>
+                                        <span class="element-value">3.16</span>
+                                    </div>
+                                    <span class="vs-text">أعلى من</span>
+                                    <div class="element-box nitrogen">
+                                        <span class="element-symbol">N</span>
+                                        <span class="element-value">3.04</span>
+                                    </div>
+                                </div>
+                                <p class="mystery-note">❓ فلماذا لا يُكوّن روابط هيدروجينية قوية؟</p>
+                            </div>
+                        </div>
+
+                        <div class="attempt-section" id="attempt-section">
+                            <h4 class="attempt-title">
+                                <i class="fas fa-pencil-alt"></i>
+                                حاول التفكير في الإجابة!
+                            </h4>
+                            <p class="attempt-subtitle">اكتب أفكارك وتحليلك قبل رؤية الإجابة الكاملة</p>
+
+                            <div class="attempt-input-area">
+                                <textarea
+                                    id="answer-input"
+                                    placeholder="اكتب إجابتك هنا... فكّر في العوامل التي تؤثر على تكوين الروابط الهيدروجينية..."
+                                    rows="4"
+                                ></textarea>
+                                <button class="attempt-btn" id="submit-attempt" onclick="handleAttempt()">
+                                    <i class="fas fa-check-circle"></i>
+                                    سجّل محاولتك
+                                </button>
+                            </div>
+
+                            <div class="attempts-counter" id="attempts-counter">
+                                <i class="fas fa-redo"></i>
+                                <span>المحاولات المتبقية: <strong id="attempts-left">3</strong>/3</span>
+                            </div>
+
+                            <div class="encouragement-message" id="encouragement-message" style="display: none;">
+                                <i class="fas fa-smile"></i>
+                                <p id="encouragement-text"></p>
+                            </div>
+                        </div>
+
+                        <div class="answer-section" id="answer-section" style="display: none;">
+                            <div class="answer-reveal-header">
+                                <i class="fas fa-lightbulb"></i>
+                                <h4>الإجابة الكاملة:</h4>
+                            </div>
+
+                            <div class="answer-intro">
+                                <p>رغم أن الكلور (Cl) له سالبية كهربائية عالية (3.16) وهي أعلى من النيتروجين (3.04)، إلا أنه <strong>لا يُشكل روابط هيدروجينية قوية</strong> مثل F, O, N. السبب يكمن في عوامل أخرى مهمة:</p>
+                            </div>
+
                             <div class="answer-points">
-                                <div class="answer-point">
+                                <div class="answer-point" data-aos="fade-right">
                                     <div class="point-icon">1</div>
                                     <div class="point-content">
                                         <strong>حجم الذرة الكبير:</strong>
@@ -1453,7 +1515,7 @@
                                     </div>
                                 </div>
 
-                                <div class="answer-point">
+                                <div class="answer-point" data-aos="fade-right" data-aos-delay="100">
                                     <div class="point-icon">2</div>
                                     <div class="point-content">
                                         <strong>كثافة الشحنة المنخفضة:</strong>
@@ -1461,7 +1523,7 @@
                                     </div>
                                 </div>
 
-                                <div class="answer-point">
+                                <div class="answer-point" data-aos="fade-right" data-aos-delay="200">
                                     <div class="point-icon">3</div>
                                     <div class="point-content">
                                         <strong>المسافة بين الجزيئات:</strong>
@@ -1470,20 +1532,20 @@
                                 </div>
                             </div>
 
-                            <div class="comparison-box">
+                            <div class="comparison-box" data-aos="zoom-in">
                                 <div class="comparison-item">
-                                    <h5>نصف قطر الذرة (بيكومتر)</h5>
+                                    <h5>📏 نصف قطر الذرة (بيكومتر)</h5>
                                     <div class="radius-comparison">
-                                        <span class="radius-value small">F: 64</span>
-                                        <span class="radius-value small">O: 66</span>
-                                        <span class="radius-value small">N: 71</span>
+                                        <span class="radius-value small">F: 64 ✓</span>
+                                        <span class="radius-value small">O: 66 ✓</span>
+                                        <span class="radius-value small">N: 71 ✓</span>
                                         <span class="radius-value large">Cl: 99 ✗</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="conclusion-note">
-                                <i class="fas fa-info-circle"></i>
+                            <div class="conclusion-note" data-aos="fade-up">
+                                <i class="fas fa-star"></i>
                                 <p><strong>الخلاصة:</strong> الرابطة الهيدروجينية لا تعتمد فقط على السالبية الكهربائية، بل تتطلب أيضاً <strong>صغر حجم الذرة</strong> لتحقيق كثافة شحنة عالية وتقارب شديد. لذلك، F, O, N فقط هي التي تُكوّن روابط هيدروجينية قوية مع الهيدروجين.</p>
                             </div>
                         </div>

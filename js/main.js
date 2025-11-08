@@ -1129,6 +1129,121 @@ document.addEventListener('keydown', (e) => {
 });
 
 // =====================================================
+// INTERACTIVE QUESTION - CHLORINE PUZZLE
+// =====================================================
+let attemptCount = 0;
+const MAX_ATTEMPTS = 3;
+
+const encouragementMessages = [
+    "محاولة رائعة! 🌟 فكر أكثر في خصائص الذرات الصغيرة مقارنة بالكبيرة...",
+    "أنت على الطريق الصحيح! 💡 حجم الذرة له دور مهم في تكوين الروابط...",
+    "تقريباً هناك! 🎯 تذكر: السالبية الكهربائية ليست العامل الوحيد!"
+];
+
+function handleAttempt() {
+    const answerInput = document.getElementById('answer-input');
+    const attemptsLeftEl = document.getElementById('attempts-left');
+    const encouragementMessage = document.getElementById('encouragement-message');
+    const encouragementText = document.getElementById('encouragement-text');
+    const answerSection = document.getElementById('answer-section');
+    const attemptSection = document.getElementById('attempt-section');
+    const submitBtn = document.getElementById('submit-attempt');
+
+    // Check if input is empty
+    if (!answerInput.value.trim()) {
+        encouragementText.textContent = "⚠️ يرجى كتابة إجابتك أولاً!";
+        encouragementMessage.style.display = 'block';
+        encouragementMessage.style.background = 'rgba(230, 126, 34, 0.1)';
+        encouragementMessage.style.borderColor = '#e67e22';
+        return;
+    }
+
+    attemptCount++;
+    const attemptsLeft = MAX_ATTEMPTS - attemptCount;
+
+    // Update attempts counter
+    attemptsLeftEl.textContent = attemptsLeft;
+
+    if (attemptCount < MAX_ATTEMPTS) {
+        // Show encouragement message
+        encouragementText.textContent = encouragementMessages[attemptCount - 1];
+        encouragementMessage.style.display = 'block';
+        encouragementMessage.style.background = 'rgba(52, 152, 219, 0.1)';
+        encouragementMessage.style.borderColor = '#3498db';
+
+        // Add animation
+        encouragementMessage.classList.add('fade-in');
+
+        // Clear input for next attempt
+        answerInput.value = '';
+        answerInput.placeholder = `المحاولة ${attemptCount + 1}... واصل التفكير!`;
+
+        // Change button text
+        if (attemptCount === MAX_ATTEMPTS - 1) {
+            submitBtn.innerHTML = '<i class="fas fa-eye"></i> المحاولة الأخيرة - اكتشف الإجابة!';
+            submitBtn.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+        }
+    } else {
+        // Reveal answer after 3 attempts
+        encouragementText.textContent = "🎉 رائع! لقد أكملت المحاولات الثلاث. الآن شاهد الإجابة الكاملة!";
+        encouragementMessage.style.display = 'block';
+        encouragementMessage.style.background = 'rgba(39, 174, 96, 0.1)';
+        encouragementMessage.style.borderColor = '#27ae60';
+
+        // Hide attempt section and show answer with animation
+        setTimeout(() => {
+            attemptSection.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            attemptSection.style.opacity = '0';
+            attemptSection.style.transform = 'translateY(-20px)';
+
+            setTimeout(() => {
+                attemptSection.style.display = 'none';
+                answerSection.style.display = 'block';
+                answerSection.style.opacity = '0';
+                answerSection.style.transform = 'translateY(20px)';
+
+                // Trigger animation
+                setTimeout(() => {
+                    answerSection.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    answerSection.style.opacity = '1';
+                    answerSection.style.transform = 'translateY(0)';
+
+                    // Scroll to answer
+                    answerSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                    // Show confetti effect (optional)
+                    showConfetti();
+                }, 100);
+            }, 500);
+        }, 1500);
+    }
+
+    // Add pulse animation to attempts counter
+    attemptsLeftEl.parentElement.classList.add('pulse-animation');
+    setTimeout(() => {
+        attemptsLeftEl.parentElement.classList.remove('pulse-animation');
+    }, 600);
+}
+
+function showConfetti() {
+    // Simple confetti effect using emojis
+    const confettiEmojis = ['🎉', '✨', '🌟', '💡', '⚡', '🔬', '🧪'];
+    const answerSection = document.getElementById('answer-section');
+
+    for (let i = 0; i < 15; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti-piece';
+        confetti.textContent = confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.animationDelay = Math.random() * 0.5 + 's';
+        answerSection.appendChild(confetti);
+
+        // Remove after animation
+        setTimeout(() => confetti.remove(), 3000);
+    }
+}
+
+// =====================================================
 // EXPORT FUNCTIONS TO GLOBAL SCOPE
 // =====================================================
 window.navigateToSection = navigateToSection;
@@ -1139,6 +1254,7 @@ window.animateModel = animateModel;
 window.startFlowSimulation = startFlowSimulation;
 window.updateScore = updateScore;
 window.showNotification = showNotification;
+window.handleAttempt = handleAttempt;
 
 // =====================================================
 // PERFORMANCE MONITORING
