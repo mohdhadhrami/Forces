@@ -2105,6 +2105,37 @@ textarea:focus {
     }
 }
 
+/* Dark Mode Adjustments for SVG Molecules */
+.dark-mode .atom.hydrogen {
+    fill: #e0e0e0;
+    stroke: #ffffff;
+    stroke-width: 1.5;
+}
+
+.dark-mode .atom.carbon {
+    fill: #999;
+    stroke: #ddd;
+    stroke-width: 1;
+}
+
+.dark-mode .geometric-network-diagram {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .atom-label,
+.dark-mode .atom-label-small {
+    fill: #f0f0f0;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+}
+
+.dark-mode .hbond-label {
+    fill: #4fc3f7;
+}
+
+.dark-mode .no-bonds-text-svg {
+    fill: #ffa726;
+}
+
 /* Responsive adjustments for SVG diagrams */
 @media (max-width: 768px) {
     .geometric-network-diagram {
