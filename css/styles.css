@@ -1971,6 +1971,164 @@ textarea:focus {
     color: var(--text-secondary);
 }
 
+/* Geometric Network Diagrams with SVG */
+.geometric-network-diagram {
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-md);
+}
+
+.molecule-svg {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+}
+
+/* Ammonia card styling */
+.molecule-network-card.ammonia-card {
+    border-top: 4px solid #9b59b6;
+}
+
+/* SVG Atom Styles */
+.atom {
+    transition: all 0.3s ease;
+}
+
+.atom:hover {
+    filter: brightness(1.2);
+}
+
+.atom.oxygen {
+    fill: #e74c3c;
+}
+
+.atom.nitrogen {
+    fill: #3498db;
+}
+
+.atom.hydrogen {
+    fill: #f0f0f0;
+    stroke: #333;
+    stroke-width: 1;
+}
+
+.atom.carbon {
+    fill: #666;
+}
+
+.atom.fluorine {
+    fill: #51cf66;
+}
+
+/* Atom Labels */
+.atom-label {
+    fill: white;
+    font-size: 14px;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+.atom-label-small {
+    fill: white;
+    font-size: 11px;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+/* Hydrogen Bond Animations */
+.h-bond {
+    animation: pulse-hbond 2s infinite;
+}
+
+@keyframes pulse-hbond {
+    0%, 100% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 1;
+        stroke-width: 4;
+    }
+}
+
+/* Hydrogen Bond Label */
+.hbond-label {
+    fill: #16a085;
+    font-size: 12px;
+    font-weight: 600;
+    pointer-events: none;
+}
+
+/* No bonds text in SVG */
+.no-bonds-text-svg {
+    fill: #e67e22;
+    font-size: 16px;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+/* Molecule Group Animations */
+.molecule-group {
+    animation: float 3s ease-in-out infinite;
+}
+
+.molecule-group.central {
+    animation: none;
+}
+
+.molecule-group:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.molecule-group:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.molecule-group:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+.molecule-group:nth-child(5) {
+    animation-delay: 0.8s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+/* Responsive adjustments for SVG diagrams */
+@media (max-width: 768px) {
+    .geometric-network-diagram {
+        min-height: 200px;
+        padding: var(--spacing-sm);
+    }
+
+    .molecule-svg {
+        max-width: 100%;
+    }
+
+    .atom-label {
+        font-size: 12px;
+    }
+
+    .atom-label-small {
+        font-size: 9px;
+    }
+
+    .hbond-label {
+        font-size: 10px;
+    }
+}
+
 /* ============================================
    PHYSICAL PROPERTIES SECTION
    ============================================ */
