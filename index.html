@@ -277,6 +277,176 @@
                                     </ol>
                                 </div>
 
+                                <!-- London Forces Animation -->
+                                <div class="london-animation-section" data-aos="zoom-in">
+                                    <h4 class="animation-title">
+                                        <i class="fas fa-play-circle"></i>
+                                        كيف تنشأ قوى لندن؟ (رسم متحرك تفاعلي)
+                                    </h4>
+
+                                    <div class="london-animation-container">
+                                        <svg viewBox="0 0 800 400" class="london-svg">
+                                            <!-- Background grid -->
+                                            <defs>
+                                                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                                                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(52, 152, 219, 0.1)" stroke-width="1"/>
+                                                </pattern>
+
+                                                <!-- Glow effect -->
+                                                <filter id="glow">
+                                                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                                    <feMerge>
+                                                        <feMergeNode in="coloredBlur"/>
+                                                        <feMergeNode in="SourceGraphic"/>
+                                                    </feMerge>
+                                                </filter>
+                                            </defs>
+
+                                            <rect width="800" height="400" fill="url(#grid)"/>
+
+                                            <!-- Stage indicators -->
+                                            <text x="400" y="30" text-anchor="middle" class="stage-indicator" id="stage-text">
+                                                المرحلة 1: حركة الإلكترونات العشوائية
+                                            </text>
+
+                                            <!-- Left Molecule -->
+                                            <g id="molecule-1" transform="translate(200, 200)">
+                                                <!-- Nucleus -->
+                                                <circle cx="0" cy="0" r="20" fill="#e74c3c" class="nucleus"/>
+                                                <text x="0" y="5" text-anchor="middle" fill="white" font-weight="bold" font-size="14">+</text>
+
+                                                <!-- Electron cloud circle -->
+                                                <circle cx="0" cy="0" r="60" fill="none" stroke="rgba(52, 152, 219, 0.3)" stroke-width="1" stroke-dasharray="5,5"/>
+
+                                                <!-- Electrons (will be animated) -->
+                                                <circle class="electron electron-1" r="8" fill="#3498db" filter="url(#glow)">
+                                                    <animateMotion dur="3s" repeatCount="indefinite">
+                                                        <mpath href="#orbit-1"/>
+                                                    </animateMotion>
+                                                </circle>
+                                                <circle class="electron electron-2" r="8" fill="#3498db" filter="url(#glow)">
+                                                    <animateMotion dur="3s" repeatCount="indefinite" begin="0.5s">
+                                                        <mpath href="#orbit-2"/>
+                                                    </animateMotion>
+                                                </circle>
+                                                <circle class="electron electron-3" r="8" fill="#3498db" filter="url(#glow)">
+                                                    <animateMotion dur="3s" repeatCount="indefinite" begin="1s">
+                                                        <mpath href="#orbit-3"/>
+                                                    </animateMotion>
+                                                </circle>
+                                                <circle class="electron electron-4" r="8" fill="#3498db" filter="url(#glow)">
+                                                    <animateMotion dur="3s" repeatCount="indefinite" begin="1.5s">
+                                                        <mpath href="#orbit-4"/>
+                                                    </animateMotion>
+                                                </circle>
+
+                                                <!-- Orbital paths -->
+                                                <path id="orbit-1" d="M 60,0 A 60,60 0 1,1 -60,0 A 60,60 0 1,1 60,0" fill="none"/>
+                                                <path id="orbit-2" d="M 0,60 A 60,60 0 1,1 0,-60 A 60,60 0 1,1 0,60" fill="none"/>
+                                                <path id="orbit-3" d="M 42,42 A 60,60 0 1,1 -42,-42 A 60,60 0 1,1 42,42" fill="none"/>
+                                                <path id="orbit-4" d="M -42,42 A 60,60 0 1,1 42,-42 A 60,60 0 1,1 -42,42" fill="none"/>
+
+                                                <!-- Partial charges (hidden initially) -->
+                                                <text x="-70" y="5" class="charge-label charge-minus" opacity="0">δ-</text>
+                                                <text x="70" y="5" class="charge-label charge-plus" opacity="0">δ+</text>
+                                            </g>
+
+                                            <!-- Right Molecule -->
+                                            <g id="molecule-2" transform="translate(600, 200)">
+                                                <!-- Nucleus -->
+                                                <circle cx="0" cy="0" r="20" fill="#e74c3c" class="nucleus"/>
+                                                <text x="0" y="5" text-anchor="middle" fill="white" font-weight="bold" font-size="14">+</text>
+
+                                                <!-- Electron cloud -->
+                                                <circle cx="0" cy="0" r="60" fill="none" stroke="rgba(52, 152, 219, 0.3)" stroke-width="1" stroke-dasharray="5,5"/>
+
+                                                <!-- Electrons -->
+                                                <circle class="electron electron-5" r="8" fill="#3498db" filter="url(#glow)">
+                                                    <animateMotion dur="3s" repeatCount="indefinite" begin="0.25s">
+                                                        <mpath href="#orbit-5"/>
+                                                    </animateMotion>
+                                                </circle>
+                                                <circle class="electron electron-6" r="8" fill="#3498db" filter="url(#glow)">
+                                                    <animateMotion dur="3s" repeatCount="indefinite" begin="0.75s">
+                                                        <mpath href="#orbit-6"/>
+                                                    </animateMotion>
+                                                </circle>
+                                                <circle class="electron electron-7" r="8" fill="#3498db" filter="url(#glow)">
+                                                    <animateMotion dur="3s" repeatCount="indefinite" begin="1.25s">
+                                                        <mpath href="#orbit-7"/>
+                                                    </animateMotion>
+                                                </circle>
+                                                <circle class="electron electron-8" r="8" fill="#3498db" filter="url(#glow)">
+                                                    <animateMotion dur="3s" repeatCount="indefinite" begin="1.75s">
+                                                        <mpath href="#orbit-8"/>
+                                                    </animateMotion>
+                                                </circle>
+
+                                                <!-- Orbital paths -->
+                                                <path id="orbit-5" d="M 60,0 A 60,60 0 1,1 -60,0 A 60,60 0 1,1 60,0" fill="none"/>
+                                                <path id="orbit-6" d="M 0,60 A 60,60 0 1,1 0,-60 A 60,60 0 1,1 0,60" fill="none"/>
+                                                <path id="orbit-7" d="M 42,42 A 60,60 0 1,1 -42,-42 A 60,60 0 1,1 42,42" fill="none"/>
+                                                <path id="orbit-8" d="M -42,42 A 60,60 0 1,1 42,-42 A 60,60 0 1,1 -42,42" fill="none"/>
+
+                                                <!-- Partial charges (hidden initially) -->
+                                                <text x="-70" y="5" class="charge-label charge-plus-induced" opacity="0">δ+</text>
+                                                <text x="70" y="5" class="charge-label charge-minus-induced" opacity="0">δ-</text>
+                                            </g>
+
+                                            <!-- Attraction line (hidden initially) -->
+                                            <line id="attraction-line" x1="200" y1="200" x2="600" y2="200"
+                                                  stroke="#27ae60" stroke-width="3" stroke-dasharray="10,5" opacity="0"/>
+
+                                            <!-- Attraction arrows -->
+                                            <g id="attraction-arrows" opacity="0">
+                                                <path d="M 130,200 L 150,190 L 150,210 Z" fill="#27ae60"/>
+                                                <path d="M 670,200 L 650,190 L 650,210 Z" fill="#27ae60"/>
+                                                <text x="400" y="180" text-anchor="middle" fill="#27ae60" font-weight="bold" font-size="16">
+                                                    قوة تجاذب ضعيفة
+                                                </text>
+                                            </g>
+                                        </svg>
+
+                                        <!-- Animation explanation cards -->
+                                        <div class="animation-stages">
+                                            <div class="stage-card active" data-stage="1">
+                                                <div class="stage-number">1</div>
+                                                <h5>حركة الإلكترونات</h5>
+                                                <p>الإلكترونات تتحرك باستمرار حول النواة بشكل عشوائي</p>
+                                            </div>
+
+                                            <div class="stage-card" data-stage="2">
+                                                <div class="stage-number">2</div>
+                                                <h5>توزيع غير متجانس</h5>
+                                                <p>في لحظة معينة، تتركز الإلكترونات في جانب واحد</p>
+                                            </div>
+
+                                            <div class="stage-card" data-stage="3">
+                                                <div class="stage-number">3</div>
+                                                <h5>عزم ثنائي قطب لحظي</h5>
+                                                <p>يتشكل قطب سالب (δ-) وقطب موجب (δ+) مؤقتاً</p>
+                                            </div>
+
+                                            <div class="stage-card" data-stage="4">
+                                                <div class="stage-number">4</div>
+                                                <h5>استقطاب مستحث</h5>
+                                                <p>القطب اللحظي يحث الجزيء المجاور على الاستقطاب</p>
+                                            </div>
+
+                                            <div class="stage-card" data-stage="5">
+                                                <div class="stage-number">5</div>
+                                                <h5>قوة لندن</h5>
+                                                <p>ينشأ تجاذب ضعيف بين δ- و δ+ للجزيئين</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="animation-note">
+                                        <i class="fas fa-info-circle"></i>
+                                        <p><strong>ملاحظة:</strong> هذه العملية تحدث بشكل لحظي ومستمر، حيث تتغير مواقع الإلكترونات وتتشكل ثنائيات أقطاب جديدة باستمرار في جميع الاتجاهات.</p>
+                                    </div>
+                                </div>
+
                                 <div class="highlight-box">
                                     <h4><i class="fas fa-star"></i> خصائص مهمة</h4>
                                     <ul>

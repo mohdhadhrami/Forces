@@ -1244,6 +1244,168 @@ function showConfetti() {
 }
 
 // =====================================================
+// LONDON FORCES ANIMATION CONTROLLER
+// =====================================================
+
+let currentLondonStage = 1;
+let londonAutoPlay = true;
+let londonAnimationInterval = null;
+
+// Initialize London forces animation when DOM is ready
+function initializeLondonAnimation() {
+    const stageCards = document.querySelectorAll('.stage-card');
+
+    if (stageCards.length === 0) return;
+
+    // Add click handlers to stage cards
+    stageCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const stage = parseInt(card.dataset.stage);
+            if (stage) {
+                stopLondonAutoPlay();
+                setLondonStage(stage);
+            }
+        });
+    });
+
+    // Set initial stage
+    setLondonStage(1);
+
+    // Start auto-play after 2 seconds
+    setTimeout(() => {
+        if (londonAutoPlay) {
+            startLondonAutoPlay();
+        }
+    }, 2000);
+}
+
+// Set specific stage
+function setLondonStage(stage) {
+    currentLondonStage = stage;
+
+    // Update stage cards
+    const stageCards = document.querySelectorAll('.stage-card');
+    stageCards.forEach(card => {
+        card.classList.remove('active');
+        if (parseInt(card.dataset.stage) === stage) {
+            card.classList.add('active');
+        }
+    });
+
+    // Update stage text
+    const stageText = document.getElementById('stage-text');
+    const stageTexts = [
+        'المرحلة 1: حركة الإلكترونات العشوائية',
+        'المرحلة 2: توزيع غير متجانس للإلكترونات',
+        'المرحلة 3: تشكل عزم ثنائي قطب لحظي',
+        'المرحلة 4: استقطاب الجزيء المجاور',
+        'المرحلة 5: قوة التجاذب (قوى لندن)'
+    ];
+
+    if (stageText) {
+        stageText.textContent = stageTexts[stage - 1] || stageTexts[0];
+    }
+
+    // Update SVG elements based on stage
+    updateLondonSVGElements(stage);
+}
+
+// Update SVG elements visibility based on stage
+function updateLondonSVGElements(stage) {
+    // Get all charge labels
+    const chargeMinus = document.querySelector('.charge-minus');
+    const chargePlus = document.querySelector('.charge-plus');
+    const chargePlusInduced = document.querySelector('.charge-plus-induced');
+    const chargeMinusInduced = document.querySelector('.charge-minus-induced');
+    const attractionLine = document.getElementById('attraction-line');
+    const attractionArrows = document.getElementById('attraction-arrows');
+
+    // Reset all to hidden
+    const hideElement = (el) => {
+        if (el) el.setAttribute('opacity', '0');
+    };
+
+    const showElement = (el) => {
+        if (el) el.setAttribute('opacity', '1');
+    };
+
+    // Hide all initially
+    hideElement(chargeMinus);
+    hideElement(chargePlus);
+    hideElement(chargePlusInduced);
+    hideElement(chargeMinusInduced);
+    hideElement(attractionLine);
+    hideElement(attractionArrows);
+
+    // Show elements based on stage
+    switch(stage) {
+        case 1:
+            // Stage 1: Only electron movement (nothing extra to show)
+            break;
+
+        case 2:
+            // Stage 2: Electrons concentrating on one side (show hint of charge)
+            if (chargeMinus) chargeMinus.setAttribute('opacity', '0.3');
+            if (chargePlus) chargePlus.setAttribute('opacity', '0.3');
+            break;
+
+        case 3:
+            // Stage 3: Instantaneous dipole forms (show full charges)
+            showElement(chargeMinus);
+            showElement(chargePlus);
+            break;
+
+        case 4:
+            // Stage 4: Induced dipole in neighbor
+            showElement(chargeMinus);
+            showElement(chargePlus);
+            showElement(chargePlusInduced);
+            showElement(chargeMinusInduced);
+            break;
+
+        case 5:
+            // Stage 5: Attraction between molecules
+            showElement(chargeMinus);
+            showElement(chargePlus);
+            showElement(chargePlusInduced);
+            showElement(chargeMinusInduced);
+            showElement(attractionLine);
+            showElement(attractionArrows);
+            break;
+    }
+}
+
+// Start auto-play through stages
+function startLondonAutoPlay() {
+    londonAutoPlay = true;
+
+    londonAnimationInterval = setInterval(() => {
+        currentLondonStage++;
+        if (currentLondonStage > 5) {
+            currentLondonStage = 1;
+        }
+        setLondonStage(currentLondonStage);
+    }, 4000); // Change stage every 4 seconds
+}
+
+// Stop auto-play
+function stopLondonAutoPlay() {
+    londonAutoPlay = false;
+    if (londonAnimationInterval) {
+        clearInterval(londonAnimationInterval);
+        londonAnimationInterval = null;
+    }
+}
+
+// Add initialization to DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Delay initialization to ensure all elements are loaded
+    setTimeout(() => {
+        initializeLondonAnimation();
+    }, 500);
+});
+
+// =====================================================
 // EXPORT FUNCTIONS TO GLOBAL SCOPE
 // =====================================================
 window.navigateToSection = navigateToSection;
@@ -1255,6 +1417,9 @@ window.startFlowSimulation = startFlowSimulation;
 window.updateScore = updateScore;
 window.showNotification = showNotification;
 window.handleAttempt = handleAttempt;
+window.setLondonStage = setLondonStage;
+window.startLondonAutoPlay = startLondonAutoPlay;
+window.stopLondonAutoPlay = stopLondonAutoPlay;
 
 // =====================================================
 // PERFORMANCE MONITORING
