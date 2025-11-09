@@ -4679,15 +4679,15 @@ textarea:focus {
 
 /* SVG Animation Styles */
 .london-svg {
-    flex: 3;
-    width: 100%;
+    flex: 0 0 60%;
+    width: 60%;
     height: auto;
     display: block;
     border-radius: var(--radius-md);
     background: linear-gradient(180deg, rgba(236, 240, 241, 0.3), rgba(189, 195, 199, 0.2));
-    transform: scale(2.5);
+    transform: scale(2);
     transform-origin: left center;
-    margin: 150px 100px 150px 50px;
+    margin: 100px 50px;
 }
 
 .stage-indicator {
@@ -4736,12 +4736,11 @@ textarea:focus {
 
 /* Animation stages */
 .animation-stages {
-    flex: 1;
+    flex: 0 0 40%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md);
-    min-width: 280px;
-    max-width: 350px;
     padding-top: var(--spacing-lg);
 }
 
@@ -4937,31 +4936,25 @@ textarea:focus {
         min-width: 200px;
     }
 
-    .pentane-card {
+    .halogens-chart-wrapper {
         flex-direction: column;
-        padding: var(--spacing-lg);
     }
 
-    .structure-container {
+    .halogens-table,
+    .chart-container {
         flex: none;
         width: 100%;
     }
 
-    .molecule-structure {
-        transform: scale(1);
+    .pentane-structures-row,
+    .pentane-details-row {
+        flex-direction: column;
     }
 
-    .pentane-info-wrapper {
+    .pentane-structure-item,
+    .pentane-card {
         flex: none;
         width: 100%;
-    }
-
-    .pentane-card h6 {
-        text-align: center;
-    }
-
-    .halogens-chart {
-        transform: scale(1.1);
     }
 }
 
@@ -4998,17 +4991,22 @@ textarea:focus {
         font-size: 18px;
     }
 
+    .halogens-table {
+        grid-template-columns: 1fr;
+    }
+
+    .pentane-structure-item,
     .pentane-card {
         padding: var(--spacing-md);
     }
 
     .structure-container {
         padding: var(--spacing-md);
+        min-height: 150px;
     }
 
-    .halogens-chart {
+    .molecule-structure {
         transform: scale(1);
-        padding: var(--spacing-md) 0;
     }
 
     .chart-container {
@@ -5127,12 +5125,22 @@ textarea:focus {
     border-left: 4px solid var(--primary-color);
 }
 
+/* Halogens Chart Wrapper - 50/50 layout */
+.halogens-chart-wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: var(--spacing-xl);
+    align-items: flex-start;
+    margin: var(--spacing-xl) 0;
+}
+
 /* Halogens Table */
 .halogens-table {
+    flex: 0 0 50%;
+    width: 50%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-md);
-    margin: var(--spacing-xl) 0;
 }
 
 .halogen-item {
@@ -5203,18 +5211,22 @@ textarea:focus {
 
 /* Chart Container */
 .chart-container {
+    flex: 0 0 50%;
+    width: 50%;
     background: white;
     border-radius: var(--radius-md);
     padding: var(--spacing-xl);
-    margin: var(--spacing-xl) 0;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .chart-title {
     text-align: center;
     color: var(--primary-color);
-    font-size: var(--font-size-xl);
-    margin-bottom: var(--spacing-xl);
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-lg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -5223,13 +5235,9 @@ textarea:focus {
 
 .halogens-chart {
     width: 100%;
-    max-width: 800px;
     height: auto;
     display: block;
-    margin: 0 auto var(--spacing-lg);
-    transform: scale(1.3);
-    transform-origin: center center;
-    padding: var(--spacing-xl) 0;
+    margin: 0 auto var(--spacing-md);
 }
 
 .chart-label {
@@ -5301,45 +5309,72 @@ textarea:focus {
     color: var(--primary-color);
 }
 
-/* Pentane Comparison */
+/* Pentane Comparison - Structures on top, details below */
 .pentane-comparison {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xxl);
+    gap: var(--spacing-xl);
     margin: var(--spacing-xl) 0;
 }
 
-.pentane-card {
+/* Structures Row - Two molecules side by side */
+.pentane-structures-row {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-lg);
+    justify-content: space-between;
+}
+
+.pentane-structure-item {
+    flex: 0 0 48%;
     background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
     border-radius: var(--radius-lg);
-    padding: var(--spacing-xl);
+    padding: var(--spacing-lg);
     border: 2px solid transparent;
     transition: all 0.3s ease;
+}
+
+.pentane-structure-item:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(52, 152, 219, 0.3);
+}
+
+.pentane-structure-item h6 {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* Details Row - Properties side by side */
+.pentane-details-row {
     display: flex;
-    flex-direction: row-reverse;
-    gap: var(--spacing-xl);
-    align-items: center;
+    flex-direction: row;
+    gap: var(--spacing-lg);
+}
+
+.pentane-card {
+    flex: 1;
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
 }
 
 .pentane-card:hover {
     border-color: var(--primary-color);
-    transform: translateX(-4px);
     box-shadow: 0 8px 24px rgba(52, 152, 219, 0.3);
 }
 
-.pentane-info-wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: var(--spacing-lg);
-}
-
 .pentane-card h6 {
-    text-align: right;
+    text-align: center;
     color: var(--primary-color);
     font-size: var(--font-size-xl);
-    margin: 0;
+    margin: 0 0 var(--spacing-lg) 0;
     padding-bottom: var(--spacing-md);
     border-bottom: 3px solid var(--primary-color);
 }
@@ -5347,9 +5382,8 @@ textarea:focus {
 .structure-container {
     background: white;
     border-radius: var(--radius-md);
-    padding: var(--spacing-xl);
-    flex: 2;
-    min-height: 250px;
+    padding: var(--spacing-lg);
+    min-height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -5357,10 +5391,10 @@ textarea:focus {
 
 .molecule-structure {
     width: 100%;
-    max-width: 500px;
+    max-width: 100%;
     height: auto;
     display: block;
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 /* Molecule SVG Elements */
@@ -5708,6 +5742,16 @@ textarea:focus {
 .dark-mode .intro-text,
 .dark-mode .stat-desc {
     color: var(--text-primary) !important;
+}
+
+/* Dark Mode Support for Pentane */
+.dark-mode .pentane-structure-item {
+    background: linear-gradient(135deg, rgba(52, 73, 94, 0.5), rgba(44, 62, 80, 0.5));
+}
+
+.dark-mode .pentane-card {
+    background: var(--bg-card);
+    border-color: var(--border-color);
 }
 
 /* Responsive styles for VDW Intro */
