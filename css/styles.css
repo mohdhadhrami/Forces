@@ -4665,16 +4665,30 @@ textarea:focus {
 }
 
 .london-animation-container {
-    background: white;
-    border-radius: var(--radius-md);
-    padding: var(--spacing-xl);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    margin-bottom: var(--spacing-lg);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xxl);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    margin-bottom: var(--spacing-xxl);
     display: flex;
     flex-direction: row-reverse;
-    gap: var(--spacing-xl);
-    align-items: flex-start;
+    gap: var(--spacing-xxl);
+    align-items: center;
     min-height: 700px;
+    border: 1px solid rgba(52, 152, 219, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.london-animation-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(52, 152, 219, 0.03) 0%, transparent 70%);
+    pointer-events: none;
 }
 
 /* SVG Animation Styles */
@@ -4683,11 +4697,15 @@ textarea:focus {
     width: 60%;
     height: auto;
     display: block;
-    border-radius: var(--radius-md);
-    background: linear-gradient(180deg, rgba(236, 240, 241, 0.3), rgba(189, 195, 199, 0.2));
+    border-radius: var(--radius-lg);
+    background: linear-gradient(180deg, rgba(236, 240, 241, 0.4), rgba(189, 195, 199, 0.3));
     transform: scale(1.8);
     transform-origin: center center;
     margin: 80px auto;
+    box-shadow: 0 4px 24px rgba(52, 152, 219, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    position: relative;
+    z-index: 1;
 }
 
 .stage-indicator {
@@ -4736,24 +4754,27 @@ textarea:focus {
 
 /* Animation stages */
 .animation-stages {
-    flex: 0 0 40%;
-    width: 40%;
+    flex: 0 0 38%;
+    width: 38%;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
-    padding-top: var(--spacing-lg);
+    gap: var(--spacing-lg);
+    padding: var(--spacing-md);
+    position: relative;
+    z-index: 1;
 }
 
 .stage-card {
-    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-    border: 2px solid transparent;
-    border-radius: var(--radius-md);
-    padding: var(--spacing-md);
+    background: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%);
+    border: 2px solid rgba(52, 152, 219, 0.2);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
     flex-shrink: 0;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 .stage-card::before {
@@ -4772,16 +4793,17 @@ textarea:focus {
 }
 
 .stage-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(52, 152, 219, 0.3);
+    transform: translateX(-4px);
+    box-shadow: 0 6px 24px rgba(52, 152, 219, 0.25);
+    border-color: rgba(52, 152, 219, 0.4);
 }
 
 .stage-card.active {
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-    border-color: var(--accent-color);
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    border-color: #2980b9;
     color: white;
-    transform: scale(1.05);
-    box-shadow: 0 12px 32px rgba(52, 152, 219, 0.4);
+    transform: translateX(-6px);
+    box-shadow: 0 8px 32px rgba(52, 152, 219, 0.4);
 }
 
 .stage-number {
@@ -4836,13 +4858,15 @@ textarea:focus {
 
 /* Animation note */
 .animation-note {
-    background: rgba(52, 152, 219, 0.1);
-    border-left: 4px solid var(--primary-color);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-lg);
+    background: linear-gradient(to right, rgba(52, 152, 219, 0.08), rgba(52, 152, 219, 0.12));
+    border-left: 5px solid var(--primary-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
     display: flex;
     align-items: start;
-    gap: var(--spacing-md);
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+    box-shadow: 0 2px 12px rgba(52, 152, 219, 0.1);
 }
 
 .animation-note i {
@@ -4865,7 +4889,12 @@ textarea:focus {
 }
 
 .dark-mode .london-animation-container {
-    background: var(--bg-card);
+    background: linear-gradient(135deg, rgba(44, 62, 80, 0.5) 0%, rgba(52, 73, 94, 0.5) 100%);
+    border-color: rgba(52, 152, 219, 0.2);
+}
+
+.dark-mode .london-animation-container::before {
+    background: radial-gradient(circle, rgba(52, 152, 219, 0.08) 0%, transparent 70%);
 }
 
 .dark-mode .london-svg {
@@ -4913,13 +4942,15 @@ textarea:focus {
     .london-animation-container {
         flex-direction: column;
         min-height: auto;
-        padding: var(--spacing-lg);
+        padding: var(--spacing-xl);
+        gap: var(--spacing-xl);
     }
 
     .london-svg {
-        transform: scale(1);
+        transform: scale(1.2);
         flex: none;
-        margin: 0;
+        width: 100%;
+        margin: var(--spacing-lg) auto;
     }
 
     .animation-stages {
@@ -4928,16 +4959,26 @@ textarea:focus {
         width: 100%;
         flex-direction: row;
         flex-wrap: wrap;
-        padding-top: 0;
+        padding: 0;
+        gap: var(--spacing-md);
     }
 
     .stage-card {
-        flex: 1 1 calc(50% - var(--spacing-md));
+        flex: 1 1 calc(50% - var(--spacing-sm));
         min-width: 200px;
+    }
+
+    .factors-section {
+        padding: var(--spacing-xl);
+    }
+
+    .factor-card {
+        padding: var(--spacing-xl);
     }
 
     .halogens-chart-wrapper {
         flex-direction: column;
+        gap: var(--spacing-xl);
     }
 
     .halogens-table,
@@ -4946,9 +4987,14 @@ textarea:focus {
         width: 100%;
     }
 
+    .chart-container {
+        padding: var(--spacing-xl);
+    }
+
     .pentane-structures-row,
     .pentane-details-row {
         flex-direction: column;
+        gap: var(--spacing-xl);
     }
 
     .pentane-structure-item,
@@ -4960,25 +5006,56 @@ textarea:focus {
 
 @media (max-width: 768px) {
     .london-animation-section {
-        padding: var(--spacing-md);
+        padding: var(--spacing-lg);
     }
 
     .animation-title {
         font-size: var(--font-size-xl);
         flex-direction: column;
+        gap: var(--spacing-sm);
     }
 
     .london-animation-container {
-        padding: var(--spacing-md);
+        padding: var(--spacing-lg);
+        gap: var(--spacing-lg);
+    }
+
+    .london-svg {
+        transform: scale(1);
+        margin: var(--spacing-md) auto;
     }
 
     .animation-stages {
         flex-direction: column;
+        gap: var(--spacing-md);
     }
 
     .stage-card {
-        padding: var(--spacing-sm);
+        padding: var(--spacing-lg);
         flex: none;
+    }
+
+    .factors-section {
+        padding: var(--spacing-lg);
+    }
+
+    .factor-card {
+        padding: var(--spacing-lg);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .halogens-table {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .chart-container {
+        padding: var(--spacing-lg);
+    }
+
+    .pentane-structure-item,
+    .pentane-card {
+        padding: var(--spacing-lg);
     }
 
     .stage-number {
@@ -5048,10 +5125,11 @@ textarea:focus {
 
 .factors-section {
     margin: var(--spacing-xxl) 0;
-    padding: var(--spacing-xl);
-    background: linear-gradient(135deg, rgba(155, 89, 182, 0.05), rgba(52, 152, 219, 0.05));
+    padding: var(--spacing-xxl);
+    background: linear-gradient(135deg, rgba(155, 89, 182, 0.08), rgba(52, 152, 219, 0.08));
     border-radius: var(--radius-lg);
-    border: 2px solid var(--border-color);
+    border: 2px solid rgba(52, 152, 219, 0.15);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 }
 
 .section-subtitle {
@@ -5071,17 +5149,19 @@ textarea:focus {
 
 /* Factor Cards */
 .factor-card {
-    background: white;
+    background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
     border-radius: var(--radius-lg);
-    padding: var(--spacing-xl);
-    margin-bottom: var(--spacing-xl);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
+    padding: var(--spacing-xxl);
+    margin-bottom: var(--spacing-xxl);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid rgba(52, 152, 219, 0.1);
 }
 
 .factor-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(52, 152, 219, 0.15);
+    border-color: rgba(52, 152, 219, 0.3);
 }
 
 .factor-header {
@@ -5116,13 +5196,14 @@ textarea:focus {
 
 .factor-explanation {
     font-size: var(--font-size-md);
-    line-height: 1.8;
+    line-height: 1.9;
     color: var(--text-primary);
     margin-bottom: var(--spacing-xl);
-    padding: var(--spacing-lg);
-    background: rgba(52, 152, 219, 0.05);
-    border-radius: var(--radius-md);
-    border-left: 4px solid var(--primary-color);
+    padding: var(--spacing-xl);
+    background: linear-gradient(to left, rgba(52, 152, 219, 0.04), rgba(52, 152, 219, 0.08));
+    border-radius: var(--radius-lg);
+    border-left: 5px solid var(--primary-color);
+    box-shadow: 0 2px 12px rgba(52, 152, 219, 0.08);
 }
 
 /* Halogens Chart Wrapper - 50/50 layout */
@@ -5144,19 +5225,21 @@ textarea:focus {
 }
 
 .halogen-item {
-    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
     text-align: center;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid rgba(52, 152, 219, 0.15);
     cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
 .halogen-item:hover {
-    transform: translateY(-6px);
+    transform: translateY(-8px) scale(1.02);
     border-color: var(--primary-color);
-    box-shadow: 0 8px 24px rgba(52, 152, 219, 0.3);
+    box-shadow: 0 12px 32px rgba(52, 152, 219, 0.25);
+    background: linear-gradient(135deg, #ffffff 0%, #e8f4f8 100%);
 }
 
 .halogen-symbol {
@@ -5213,13 +5296,20 @@ textarea:focus {
 .chart-container {
     flex: 0 0 50%;
     width: 50%;
-    background: white;
-    border-radius: var(--radius-md);
-    padding: var(--spacing-xl);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xxl);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    border: 2px solid rgba(52, 152, 219, 0.1);
     display: flex;
     flex-direction: column;
     justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.chart-container:hover {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    border-color: rgba(52, 152, 219, 0.2);
 }
 
 .chart-title {
@@ -5327,17 +5417,19 @@ textarea:focus {
 
 .pentane-structure-item {
     flex: 0 0 48%;
-    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    background: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%);
     border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
+    padding: var(--spacing-xl);
+    border: 2px solid rgba(52, 152, 219, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
 .pentane-structure-item:hover {
     border-color: var(--primary-color);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(52, 152, 219, 0.3);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(52, 152, 219, 0.25);
+    background: linear-gradient(135deg, #ffffff 0%, #e8f4f8 100%);
 }
 
 .pentane-structure-item h6 {
@@ -5358,16 +5450,18 @@ textarea:focus {
 
 .pentane-card {
     flex: 1;
-    background: white;
+    background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
     border-radius: var(--radius-lg);
-    padding: var(--spacing-xl);
-    border: 2px solid var(--border-color);
-    transition: all 0.3s ease;
+    padding: var(--spacing-xxl);
+    border: 2px solid rgba(52, 152, 219, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
 .pentane-card:hover {
     border-color: var(--primary-color);
-    box-shadow: 0 8px 24px rgba(52, 152, 219, 0.3);
+    box-shadow: 0 10px 32px rgba(52, 152, 219, 0.2);
+    transform: translateY(-4px);
 }
 
 .pentane-card h6 {
@@ -5528,15 +5622,33 @@ textarea:focus {
     background: linear-gradient(135deg, rgba(155, 89, 182, 0.1), rgba(52, 152, 219, 0.1));
 }
 
-.dark-mode .factor-card,
-.dark-mode .chart-container,
-.dark-mode .structure-container {
-    background: var(--bg-card);
+.dark-mode .factor-card {
+    background: linear-gradient(to bottom, rgba(44, 62, 80, 0.5) 0%, rgba(52, 73, 94, 0.5) 100%);
+    border-color: rgba(52, 152, 219, 0.2);
 }
 
-.dark-mode .halogen-item,
+.dark-mode .chart-container {
+    background: linear-gradient(to bottom, rgba(44, 62, 80, 0.5) 0%, rgba(52, 73, 94, 0.5) 100%);
+    border-color: rgba(52, 152, 219, 0.2);
+}
+
+.dark-mode .structure-container {
+    background: rgba(52, 73, 94, 0.3);
+}
+
+.dark-mode .halogen-item {
+    background: linear-gradient(135deg, rgba(44, 62, 80, 0.5) 0%, rgba(52, 73, 94, 0.5) 100%);
+    border-color: rgba(52, 152, 219, 0.2);
+}
+
 .dark-mode .pentane-card {
-    background: linear-gradient(135deg, rgba(52, 73, 94, 0.5), rgba(44, 62, 80, 0.5));
+    background: linear-gradient(to bottom, rgba(44, 62, 80, 0.5) 0%, rgba(52, 73, 94, 0.5) 100%);
+    border-color: rgba(52, 152, 219, 0.2);
+}
+
+.dark-mode .pentane-structure-item {
+    background: linear-gradient(135deg, rgba(44, 62, 80, 0.5) 0%, rgba(52, 73, 94, 0.5) 100%);
+    border-color: rgba(52, 152, 219, 0.2);
 }
 
 .dark-mode .factor-explanation,
