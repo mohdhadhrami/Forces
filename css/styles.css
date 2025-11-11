@@ -4671,7 +4671,7 @@ textarea:focus {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     margin-bottom: var(--spacing-lg);
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     gap: var(--spacing-xl);
     align-items: flex-start;
     min-height: 700px;
@@ -4685,9 +4685,9 @@ textarea:focus {
     display: block;
     border-radius: var(--radius-md);
     background: linear-gradient(180deg, rgba(236, 240, 241, 0.3), rgba(189, 195, 199, 0.2));
-    transform: scale(2);
-    transform-origin: left center;
-    margin: 100px 50px;
+    transform: scale(1.8);
+    transform-origin: center center;
+    margin: 80px auto;
 }
 
 .stage-indicator {
