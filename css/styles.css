@@ -4669,7 +4669,7 @@ textarea:focus {
     border-radius: var(--radius-lg);
     padding: var(--spacing-xxl);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    margin-bottom: var(--spacing-xxl);
+    margin: 0 auto var(--spacing-xxl);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4677,6 +4677,8 @@ textarea:focus {
     border: 1px solid rgba(52, 152, 219, 0.1);
     position: relative;
     overflow: visible;
+    width: 110%;
+    max-width: calc(100vw - 40px);
 }
 
 .london-animation-container::before {
@@ -4994,6 +4996,13 @@ textarea:focus {
     .london-animation-container {
         min-height: 800px;
         padding: var(--spacing-xl);
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .factors-section {
+        width: 100%;
+        max-width: 100%;
     }
 
     .london-svg {
@@ -5077,6 +5086,14 @@ textarea:focus {
 
     .london-animation-container {
         min-height: 700px;
+        padding: var(--spacing-lg);
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .factors-section {
+        width: 100%;
+        max-width: 100%;
         padding: var(--spacing-lg);
     }
 
@@ -5233,12 +5250,14 @@ textarea:focus {
    ============================================ */
 
 .factors-section {
-    margin: var(--spacing-xxl) 0;
+    margin: var(--spacing-xxl) auto;
     padding: var(--spacing-xxl);
     background: linear-gradient(135deg, rgba(155, 89, 182, 0.08), rgba(52, 152, 219, 0.08));
     border-radius: var(--radius-lg);
     border: 2px solid rgba(52, 152, 219, 0.15);
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    width: 110%;
+    max-width: calc(100vw - 40px);
 }
 
 .section-subtitle {
