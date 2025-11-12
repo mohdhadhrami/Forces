@@ -4671,41 +4671,41 @@ textarea:focus {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     margin-bottom: var(--spacing-xxl);
     display: flex;
-    flex-direction: row-reverse;
-    gap: var(--spacing-xxl);
     align-items: center;
-    min-height: 700px;
+    justify-content: center;
+    min-height: 1000px;
     border: 1px solid rgba(52, 152, 219, 0.1);
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .london-animation-container::before {
     content: '';
     position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 200%;
-    height: 200%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 150%;
     background: radial-gradient(circle, rgba(52, 152, 219, 0.03) 0%, transparent 70%);
     pointer-events: none;
+    z-index: 0;
 }
 
 /* SVG Animation Styles */
 .london-svg {
-    flex: 0 0 60%;
-    width: 60%;
-    height: auto;
+    width: 400px;
+    height: 400px;
     display: block;
-    border-radius: var(--radius-lg);
-    background: linear-gradient(180deg, rgba(236, 240, 241, 0.4), rgba(189, 195, 199, 0.3));
-    transform: scale(1.8);
-    transform-origin: center center;
-    margin: 80px auto;
-    box-shadow: 0 4px 24px rgba(52, 152, 219, 0.15);
-    border: 2px solid rgba(255, 255, 255, 0.8);
-    position: relative;
-    z-index: 1;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(236, 240, 241, 0.5), rgba(189, 195, 199, 0.4));
+    box-shadow: 0 0 60px rgba(52, 152, 219, 0.2), 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 3px solid rgba(52, 152, 219, 0.2);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
 }
 
 .stage-indicator {
@@ -4752,15 +4752,13 @@ textarea:focus {
     fill: #e74c3c;
 }
 
-/* Animation stages */
+/* Animation stages - Circular Layout */
 .animation-stages {
-    flex: 0 0 38%;
-    width: 38%;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
-    padding: var(--spacing-md);
-    position: relative;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
     z-index: 1;
 }
 
@@ -4771,10 +4769,40 @@ textarea:focus {
     padding: var(--spacing-lg);
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
+    position: absolute;
+    width: 200px;
     overflow: hidden;
-    flex-shrink: 0;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    z-index: 3;
+}
+
+/* Circular positioning for 5 cards */
+.stage-card:nth-child(1) {
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.stage-card:nth-child(2) {
+    top: 25%;
+    right: 8%;
+    transform: translateY(-50%);
+}
+
+.stage-card:nth-child(3) {
+    bottom: 15%;
+    right: 15%;
+}
+
+.stage-card:nth-child(4) {
+    bottom: 15%;
+    left: 15%;
+}
+
+.stage-card:nth-child(5) {
+    top: 25%;
+    left: 8%;
+    transform: translateY(-50%);
 }
 
 .stage-card::before {
@@ -4793,17 +4821,41 @@ textarea:focus {
 }
 
 .stage-card:hover {
-    transform: translateX(-4px);
-    box-shadow: 0 6px 24px rgba(52, 152, 219, 0.25);
-    border-color: rgba(52, 152, 219, 0.4);
+    box-shadow: 0 8px 32px rgba(52, 152, 219, 0.3);
+    border-color: rgba(52, 152, 219, 0.5);
+    transform: scale(1.05);
+}
+
+.stage-card:nth-child(1):hover {
+    transform: translateX(-50%) scale(1.05);
+}
+
+.stage-card:nth-child(2):hover {
+    transform: translateY(-50%) scale(1.05);
+}
+
+.stage-card:nth-child(5):hover {
+    transform: translateY(-50%) scale(1.05);
 }
 
 .stage-card.active {
     background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
     border-color: #2980b9;
     color: white;
-    transform: translateX(-6px);
-    box-shadow: 0 8px 32px rgba(52, 152, 219, 0.4);
+    box-shadow: 0 8px 40px rgba(52, 152, 219, 0.5);
+    transform: scale(1.08);
+}
+
+.stage-card:nth-child(1).active {
+    transform: translateX(-50%) scale(1.08);
+}
+
+.stage-card:nth-child(2).active {
+    transform: translateY(-50%) scale(1.08);
+}
+
+.stage-card:nth-child(5).active {
+    transform: translateY(-50%) scale(1.08);
 }
 
 .stage-number {
@@ -4940,32 +4992,42 @@ textarea:focus {
 /* Responsive styles for London Animation */
 @media (max-width: 1024px) {
     .london-animation-container {
-        flex-direction: column;
-        min-height: auto;
+        min-height: 800px;
         padding: var(--spacing-xl);
-        gap: var(--spacing-xl);
     }
 
     .london-svg {
-        transform: scale(1.2);
-        flex: none;
-        width: 100%;
-        margin: var(--spacing-lg) auto;
-    }
-
-    .animation-stages {
-        flex: none;
-        max-width: none;
-        width: 100%;
-        flex-direction: row;
-        flex-wrap: wrap;
-        padding: 0;
-        gap: var(--spacing-md);
+        width: 350px;
+        height: 350px;
     }
 
     .stage-card {
-        flex: 1 1 calc(50% - var(--spacing-sm));
-        min-width: 200px;
+        width: 180px;
+        padding: var(--spacing-md);
+    }
+
+    .stage-card:nth-child(1) {
+        top: 3%;
+    }
+
+    .stage-card:nth-child(2) {
+        top: 22%;
+        right: 5%;
+    }
+
+    .stage-card:nth-child(3) {
+        bottom: 12%;
+        right: 10%;
+    }
+
+    .stage-card:nth-child(4) {
+        bottom: 12%;
+        left: 10%;
+    }
+
+    .stage-card:nth-child(5) {
+        top: 22%;
+        left: 5%;
     }
 
     .factors-section {
@@ -4976,19 +5038,17 @@ textarea:focus {
         padding: var(--spacing-xl);
     }
 
-    .halogens-chart-wrapper {
-        flex-direction: column;
-        gap: var(--spacing-xl);
-    }
-
-    .halogens-table,
-    .chart-container {
-        flex: none;
-        width: 100%;
+    .halogens-table {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
     }
 
     .chart-container {
         padding: var(--spacing-xl);
+    }
+
+    .halogens-chart {
+        min-height: 500px;
     }
 
     .pentane-structures-row,
@@ -5016,23 +5076,52 @@ textarea:focus {
     }
 
     .london-animation-container {
+        min-height: 700px;
         padding: var(--spacing-lg);
-        gap: var(--spacing-lg);
     }
 
     .london-svg {
-        transform: scale(1);
-        margin: var(--spacing-md) auto;
-    }
-
-    .animation-stages {
-        flex-direction: column;
-        gap: var(--spacing-md);
+        width: 280px;
+        height: 280px;
     }
 
     .stage-card {
-        padding: var(--spacing-lg);
-        flex: none;
+        width: 150px;
+        padding: var(--spacing-sm);
+        font-size: var(--font-size-sm);
+    }
+
+    .stage-card h5 {
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .stage-card p {
+        font-size: 0.75rem;
+    }
+
+    .stage-card:nth-child(1) {
+        top: 2%;
+    }
+
+    .stage-card:nth-child(2) {
+        top: 20%;
+        right: 2%;
+    }
+
+    .stage-card:nth-child(3) {
+        bottom: 10%;
+        right: 5%;
+    }
+
+    .stage-card:nth-child(4) {
+        bottom: 10%;
+        left: 5%;
+    }
+
+    .stage-card:nth-child(5) {
+        top: 20%;
+        left: 2%;
     }
 
     .factors-section {
@@ -5053,15 +5142,35 @@ textarea:focus {
         padding: var(--spacing-lg);
     }
 
+    .halogens-chart {
+        min-height: 400px;
+    }
+
+    .chart-title {
+        font-size: var(--font-size-lg);
+    }
+
+    .chart-label {
+        font-size: 14px;
+    }
+
+    .axis-title {
+        font-size: 16px;
+    }
+
+    .point-label {
+        font-size: 16px;
+    }
+
     .pentane-structure-item,
     .pentane-card {
         padding: var(--spacing-lg);
     }
 
     .stage-number {
-        width: 35px;
-        height: 35px;
-        font-size: var(--font-size-lg);
+        width: 30px;
+        height: 30px;
+        font-size: var(--font-size-sm);
     }
 
     .charge-label {
@@ -5206,22 +5315,22 @@ textarea:focus {
     box-shadow: 0 2px 12px rgba(52, 152, 219, 0.08);
 }
 
-/* Halogens Chart Wrapper - 50/50 layout */
+/* Halogens Chart Wrapper - Vertical layout with large chart */
 .halogens-chart-wrapper {
     display: flex;
-    flex-direction: row-reverse;
-    gap: var(--spacing-xl);
-    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--spacing-xxl);
+    align-items: center;
     margin: var(--spacing-xl) 0;
 }
 
-/* Halogens Table */
+/* Halogens Table - Below chart */
 .halogens-table {
-    flex: 0 0 50%;
-    width: 50%;
+    width: 100%;
+    max-width: 1400px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-lg);
 }
 
 .halogen-item {
@@ -5292,10 +5401,10 @@ textarea:focus {
     color: var(--accent-color);
 }
 
-/* Chart Container */
+/* Chart Container - 3x larger */
 .chart-container {
-    flex: 0 0 50%;
-    width: 50%;
+    width: 100%;
+    max-width: 1400px;
     background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
     border-radius: var(--radius-lg);
     padding: var(--spacing-xxl);
@@ -5315,31 +5424,38 @@ textarea:focus {
 .chart-title {
     text-align: center;
     color: var(--primary-color);
-    font-size: var(--font-size-lg);
-    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-xxl);
+    margin-bottom: var(--spacing-xl);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-md);
+    font-weight: bold;
+}
+
+.chart-title i {
+    font-size: 2rem;
 }
 
 .halogens-chart {
     width: 100%;
+    min-height: 600px;
     height: auto;
     display: block;
-    margin: 0 auto var(--spacing-md);
+    margin: 0 auto var(--spacing-lg);
 }
 
 .chart-label {
-    font-size: 14px;
+    font-size: 18px;
     fill: var(--text-secondary);
     font-family: 'Cairo', sans-serif;
+    font-weight: 500;
 }
 
 .axis-title {
-    font-size: 16px;
+    font-size: 20px;
     fill: var(--text-primary);
-    font-weight: 600;
+    font-weight: 700;
     font-family: 'Cairo', sans-serif;
 }
 
@@ -5347,6 +5463,7 @@ textarea:focus {
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
     animation: draw-line 2s ease forwards;
+    stroke-width: 4;
 }
 
 @keyframes draw-line {
@@ -5362,8 +5479,8 @@ textarea:focus {
 }
 
 .data-point:hover {
-    r: 10;
-    filter: drop-shadow(0 0 8px currentColor);
+    r: 12;
+    filter: drop-shadow(0 0 12px currentColor);
 }
 
 @keyframes pulse-point {
@@ -5371,26 +5488,27 @@ textarea:focus {
         opacity: 1;
     }
     50% {
-        opacity: 0.7;
+        opacity: 0.8;
     }
 }
 
 .point-label {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     fill: var(--text-primary);
     font-family: 'Cairo', sans-serif;
 }
 
 .chart-note {
-    background: rgba(52, 152, 219, 0.1);
-    padding: var(--spacing-md);
-    border-radius: var(--radius-sm);
-    border-left: 4px solid var(--primary-color);
-    font-size: var(--font-size-sm);
-    line-height: 1.6;
+    background: linear-gradient(to right, rgba(52, 152, 219, 0.08), rgba(52, 152, 219, 0.12));
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    border-left: 5px solid var(--primary-color);
+    font-size: var(--font-size-md);
+    line-height: 1.8;
     color: var(--text-primary);
     display: flex;
+    box-shadow: 0 2px 12px rgba(52, 152, 219, 0.1);
     align-items: center;
     gap: var(--spacing-sm);
 }
